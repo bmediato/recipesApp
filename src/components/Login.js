@@ -25,6 +25,13 @@ export default class Login extends Component {
     return isEmailValid && isSenhaValid;
   };
 
+  btnClick = () => {
+    const {history} = this.props; 
+    const {email} = this.state;
+    localStorage.setItem('user', JSON.stringify({ email }));
+    history.push('/meals');
+  };
+
   render() {
     const { email, senha } = this.state;
     return (
@@ -49,8 +56,7 @@ export default class Login extends Component {
           data-testid="login-submit-btn"
           type="button"
           disabled={ !this.isButtonEnable() }
-          // onClick={ () => {
-          // } }
+          onClick={ this.btnClick }
         >
           Enter
         </button>

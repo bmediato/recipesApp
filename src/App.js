@@ -4,6 +4,7 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Switch, Route } from 'react-router-dom';
 import Login from './components/Login';
+import Recipes from './components/Recipes';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
     // </div>
     <Switch>
       <Route exact path="/" component={ Login } />
+      <Route path="/meals" componente={ Recipes } />
     </Switch>
   );
 }
