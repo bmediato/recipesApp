@@ -16,13 +16,24 @@ export default class Login extends Component {
     });
   };
 
+  isButtonEnable = () => {
+    const { email, senha } = this.state;
+    const numero6 = 6;
+    const pattern = /[\w-.]+@[\w]+.com/;
+    const isEmailValid = pattern.test(email);
+    const isSenhaValid = senha.length > numero6;
+    return isEmailValid && isSenhaValid;
+  };
+
   render() {
+    const { email, senha } = this.state;
     return (
       <>
         <input
           data-testid="email-input"
           type="text"
           name="email"
+          value={ email }
           onChange={ this.onInputChange }
         />
 
@@ -30,13 +41,14 @@ export default class Login extends Component {
           data-testid="password-input"
           type="password"
           name="senha"
+          value={ senha }
           onChange={ this.onInputChange }
         />
 
         <button
           data-testid="login-submit-btn"
           type="button"
-          disable={ this.isButtonEnable }
+          disable={ !this.isButtonEnable }
           onClick={ () => {
           } }
         >
