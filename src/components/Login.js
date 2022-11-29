@@ -12,7 +12,7 @@ export default class Login extends Component {
   onInputChange = ({ target }) => {
     const { name, value } = target;
     this.setState({
-      [name]: [value],
+      [name]: value,
     });
   };
 
@@ -48,9 +48,9 @@ export default class Login extends Component {
         <button
           data-testid="login-submit-btn"
           type="button"
-          disable={ !this.isButtonEnable }
-          onClick={ () => {
-          } }
+          disabled={ !this.isButtonEnable() }
+          // onClick={ () => {
+          // } }
         >
           Enter
         </button>
