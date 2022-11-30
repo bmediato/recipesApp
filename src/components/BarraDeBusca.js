@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getFoodIngredient } from '../services/FoodAPI';
+import { fetchRecipes } from '../redux/actions';
 
 class BarraDeBusca extends Component {
   state = {
+    recipes: [],
     searchInput: '',
     ingredient: '',
     name: '',
@@ -12,10 +13,9 @@ class BarraDeBusca extends Component {
 
   handleRadioButton = async () => {
     const { dispatch } = this.props;
-    const { searchInput, ingredient, name, firstLetter } = this.state;
+    const { recipes, searchInput, ingredient, name, firstLetter } = this.state;
 
-    dispatch(fetchRecipes({ searchInput, ingredient, name, firstLetter }));
-    }
+    dispatch(fetchRecipes({ recipes, searchInput, ingredient, name, firstLetter }));
   };
 
   onInputChange = ({ target }) => {
@@ -44,6 +44,7 @@ class BarraDeBusca extends Component {
             id="ingredient"
             name="ingredient"
             value={ ingredient }
+            onChange={ this.handleRadioButton }
           />
         </label>
         <label htmlFor="name">
@@ -54,6 +55,7 @@ class BarraDeBusca extends Component {
             id="name"
             name="name"
             value={ name }
+            onChange={ this.handleRadioButton }
           />
         </label>
         <label htmlFor="firstLetter">
@@ -64,6 +66,7 @@ class BarraDeBusca extends Component {
             id="firstLetter"
             name="firstLetter"
             value={ firstLetter }
+            onChange={ this.handleRadioButton }
           />
         </label>
         <button
@@ -78,4 +81,8 @@ class BarraDeBusca extends Component {
   }
 }
 
+BarraDeBusca.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  // recipes: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 export default connect(mapStateToProps)(BarraDeBusca);
