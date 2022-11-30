@@ -53,7 +53,7 @@ class SearchBar extends Component {
   handleButtonClick = async () => {
     const recipes = await this.fetchRecipes();
     console.log(recipes);
-    this.setState({ recipes });
+    // this.setState({ recipes });
   };
 
   onInputChange = ({ target }) => {
@@ -62,7 +62,7 @@ class SearchBar extends Component {
   };
 
   render() {
-    const { searchInput, recipes } = this.state;
+    const { searchInput } = this.state;
     return (
       <form>
         <input
