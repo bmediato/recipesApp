@@ -67,12 +67,12 @@
   }
 }
 
-.footer{
-  margin-top: 2rem;
-  padding: 2rem;
+.footer {
   background-color: #464646;
-  position: fixed;
   bottom: 0;
   left: 0;
+  margin-top: 2rem;
+  padding: 2rem;
+  position: fixed;
   width: 100%;
 }
