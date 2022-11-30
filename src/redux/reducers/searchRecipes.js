@@ -1,11 +1,9 @@
 import { SHOW_RECIPES } from '../actions';
 
 const INITIAL_STATE = {
+  page: '',
   recipes: [],
   searchInput: '',
-  ingredient: '',
-  name: '',
-  firstLetter: '',
 };
 
 function searchRecipes(state = INITIAL_STATE, action) {
@@ -14,6 +12,11 @@ function searchRecipes(state = INITIAL_STATE, action) {
     return {
       ...state,
       recipes: action.payload,
+    };
+  case SAVE_PAGE:
+    return {
+      ...state,
+      page: action.payload,
     };
   default:
     return state;
