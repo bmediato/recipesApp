@@ -1,8 +1,18 @@
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
+import { savePage } from '../redux/actions';
 import Header from './Header';
 
 class RecipesMeals extends Component {
+  componentDidMount() {
+    const { dispatch, history } = this.props;
+    const url = history.location.pathname;
+    const page = url.slice(1);
+    console.log(page);
+    dispatch(savePage(page));
+  }
+
   render() {
     const { history } = this.props;
     return (<Header
@@ -15,7 +25,12 @@ class RecipesMeals extends Component {
 }
 
 RecipesMeals.propTypes = {
-  history: PropTypes.shape({}).isRequired,
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }),
+  }).isRequired,
 };
 
-export default RecipesMeals;
+export default connect()(RecipesMeals);

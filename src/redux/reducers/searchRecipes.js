@@ -1,4 +1,4 @@
-import { SHOW_RECIPES } from '../actions';
+import { SHOW_RECIPES, SAVE_PAGE } from '../actions';
 
 const INITIAL_STATE = {
   page: '',

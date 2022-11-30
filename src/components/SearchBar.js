@@ -1,6 +1,6 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { savePage } from '../redux/actions';
 import {
   getDrinkFirstLetter,
   getDrinkIngredient,
@@ -17,14 +17,8 @@ class SearchBar extends Component {
     radioValue: '',
   };
 
-  componentDidMount() {
-    const { dispatch, history } = this.props;
-    const url = history.location.pathname;
-    const page = url.slice(1);
-    dispatch(savePage(page));
-  }
-
   fetchRecipes = async () => {
+    const { page } = this.props;
     const { radioValue, searchInput } = this.state;
     if (page === 'meals') {
       switch (radioValue) {
@@ -58,6 +52,7 @@ class SearchBar extends Component {
 
   handleButtonClick = async () => {
     const recipes = await this.fetchRecipes();
+    console.log(recipes);
     this.setState({ recipes });
   };
 
@@ -71,7 +66,7 @@ class SearchBar extends Component {
     return (
       <form>
         <input
-          data-testid="searchInput"
+          data-testid="search-input"
           placeholder="Search"
           type="text"
           name="searchInput"
@@ -125,12 +120,16 @@ class SearchBar extends Component {
 }
 
 SearchBar.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  // recipes: PropTypes.arrayOf(PropTypes.string).isRequired,
+  page: PropTypes.string.isRequired,
+  history: PropTypes.shape({
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
+    }),
+  }).isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  page: state.page,
+  page: state.searchRecipes.page,
 });
 
 export default connect(mapStateToProps)(SearchBar);
