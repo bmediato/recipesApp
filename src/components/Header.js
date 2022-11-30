@@ -1,26 +1,19 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
 
 class Header extends Component {
-  // HeaderTitle = () => {
-  //   const { history } = this.props;
-  //   const { location: { pathname } } = history;
-  // };
-
-  // IconSeach = () => {
-  //   const { history } = this.props;
-  //   const { location: { pathname } } = history;
-  //   if (imgProfile) {
-  //     return (
-
-  //     );
-  //   }
-  // };
+  constructor() {
+    super();
+    this.state = {
+      isSearching: false,
+    };
+  }
 
   render() {
-    // console.log(this.HeaderTitle);
     const { title, imgProfile, imgSearch } = this.props;
+    const { isSearching } = this.state;
     return (
       <header>
         <h1 data-testid="page-title">
@@ -40,19 +33,33 @@ class Header extends Component {
         )}
         {imgSearch
         && (
-          <img
-            data-testid="search-top-btn"
-            src={ searchIcon }
-            alt="searchIcon"
-          />
+          <button
+            type="button"
+            id="button__seach"
+            onClick={ () => {
+              this.setState({
+                isSearching: !isSearching,
+              });
+            } }
+          >
+            <img
+              data-testid="search-top-btn"
+              src={ searchIcon }
+              alt="searchIcon"
+            />
+          </button>
         )}
 
-        {/* {this.IconSeach()} */}
       </header>
     );
   }
 }
 
-Header.propTypes = {}.isRequired;
+Header.propTypes = {
+  history: PropTypes.shape({}).isRequired,
+  title: PropTypes.string.isRequired,
+  imgProfile: PropTypes.bool.isRequired,
+  imgSearch: PropTypes.bool.isRequired,
+};
 
 export default Header;
