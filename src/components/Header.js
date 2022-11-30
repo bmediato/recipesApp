@@ -1,53 +1,53 @@
 import React, { Component } from 'react';
+import searchIcon from '../images/searchIcon.svg';
+import profileIcon from '../images/profileIcon.svg';
 
 class Header extends Component {
-  HeaderTitle = () => {
-    const { history } = this.props;
-    const { location: { pathname } } = history;
-    console.log(pathname);
-    if (pathname === '/meals') {
-      return 'Meals';
-    } if (pathname === '/drinks') {
-      return 'Drinks';
-    } if (pathname === '/profile') {
-      return 'Profile';
-    } if (pathname === '/done-recipes') {
-      return 'Done Recipes';
-    } if (pathname === '/favorite-recipes') {
-      return 'Favorite Recipes';
-    }
-  };
+  // HeaderTitle = () => {
+  //   const { history } = this.props;
+  //   const { location: { pathname } } = history;
+  // };
 
-  IconSeach = () => {
-    const { history } = this.props;
-    const { location: { pathname } } = history;
-    if (pathname === '/meals' || pathname === '/drinks') {
-      return (
-        <img
-          data-testid="search-top-btn"
-          src="../images/searchIcon.svg"
-          alt="searchIcon"
-        />
-      );
-    }
-  };
+  // IconSeach = () => {
+  //   const { history } = this.props;
+  //   const { location: { pathname } } = history;
+  //   if (imgProfile) {
+  //     return (
+
+  //     );
+  //   }
+  // };
 
   render() {
-    console.log(this.HeaderTitle);
+    // console.log(this.HeaderTitle);
+    const { title, imgProfile, imgSearch } = this.props;
     return (
       <header>
         <h1 data-testid="page-title">
-          {this.HeaderTitle()}
+          {title}
         </h1>
-        <a href="/profile">
-          <img
-            src="../images/profileIcon.svg"
-            alt="profileIcon"
-            data-testid="profile-top-btn"
-          />
 
-        </a>
-        {this.IconSeach()}
+        {imgProfile
+        && (
+          <a href="/profile">
+            <img
+              src={ profileIcon }
+              alt="profileIcon"
+              data-testid="profile-top-btn"
+            />
+
+          </a>
+        )}
+        {imgSearch
+        && (
+          <img
+            data-testid="search-top-btn"
+            src={ searchIcon }
+            alt="searchIcon"
+          />
+        )}
+
+        {/* {this.IconSeach()} */}
       </header>
     );
   }
