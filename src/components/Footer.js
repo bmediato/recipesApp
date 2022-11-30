@@ -6,14 +6,14 @@ export default class Footer extends Component {
   render() {
     return (
       <footer data-testid="footer" className="footer">
-        <a href="/drink">
+        <a href="/drinks">
           <img
             src={ drinkIcon }
             alt="DrinkIcon"
             data-testid="drinks-bottom-btn"
           />
         </a>
-        <a href="/meal">
+        <a href="/meals">
           <img
             src={ mealIcon }
             alt="MealIcon"
