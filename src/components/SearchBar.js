@@ -12,7 +12,7 @@ import {
 
 class SearchBar extends Component {
   state = {
-    recipes: [],
+    // recipes: [],
     searchInput: '',
     radioValue: '',
   };
