@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class Login extends Component {
   constructor() {
@@ -26,8 +27,8 @@ export default class Login extends Component {
   };
 
   btnClick = () => {
-    const {history} = this.props; 
-    const {email} = this.state;
+    const { history } = this.props;
+    const { email } = this.state;
     localStorage.setItem('user', JSON.stringify({ email }));
     history.push('/meals');
   };
@@ -64,3 +65,9 @@ export default class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
