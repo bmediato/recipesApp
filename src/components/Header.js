@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import searchIcon from '../images/searchIcon.svg';
-import profileIcon from '../images/profileIcon.svg';
 
 class Header extends Component {
   HeaderTitle = () => {
     const { history } = this.props;
     const { location: { pathname } } = history;
+    console.log(pathname);
     if (pathname === '/meals') {
       return 'Meals';
     } if (pathname === '/drinks') {
@@ -26,7 +25,7 @@ class Header extends Component {
       return (
         <img
           data-testid="search-top-btn"
-          src={ searchIcon }
+          src="../images/searchIcon.svg"
           alt="searchIcon"
         />
       );
@@ -40,11 +39,14 @@ class Header extends Component {
         <h1 data-testid="page-title">
           {this.HeaderTitle()}
         </h1>
-        <img
-          src={ profileIcon }
-          alt="profileIcon"
-          data-testid="profile-top-btn"
-        />
+        <a href="/profile">
+          <img
+            src="../images/profileIcon.svg"
+            alt="profileIcon"
+            data-testid="profile-top-btn"
+          />
+
+        </a>
         {this.IconSeach()}
       </header>
     );

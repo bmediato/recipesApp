@@ -27,8 +27,8 @@ function App() {
     // </div>
     <Switch>
       <Route exact path="/" component={ Login } />
-      <Route path="/meals" componente={ RecipesMeals } />
-      <Route path="/drinks" component={ RecipesDrinks } />
+      <Route exact path="/meals" componente={ RecipesMeals } />
+      <Route exact path="/drinks" component={ RecipesDrinks } />
       <Route exact path="/meals/:id-da-receita" component={ RecipeDetails } />
       <Route exact path="/drinks/:id-da-receita" component={ RecipeDetails } />
       <Route path="/meals/:id-da-receita/in-progress" component={ RecipeInProgress } />
