@@ -17,6 +17,13 @@ class SearchBar extends Component {
     radioValue: '',
   };
 
+  isButtonDisabled = () => {
+    const { searchInput, radioValue } = this.state;
+    const isSearchValueValid = searchInput.length > 0;
+    const isradioValueValid = radioValue.length > 0;
+    return isSearchValueValid && isradioValueValid;
+  };
+
   fetchRecipes = async () => {
     const { page } = this.props;
     const { radioValue, searchInput } = this.state;
@@ -26,10 +33,8 @@ class SearchBar extends Component {
         return getFoodIngredient(searchInput);
       case 'name':
         return getFoodName(searchInput);
-      case 'firstLetter':
-        return getFoodFirstLetter(searchInput);
       default:
-        break;
+        return getFoodFirstLetter(searchInput);
       }
     }
     switch (radioValue) {
@@ -37,10 +42,8 @@ class SearchBar extends Component {
       return getDrinkIngredient(searchInput);
     case 'name':
       return getDrinkName(searchInput);
-    case 'firstLetter':
-      return getDrinkFirstLetter(searchInput);
     default:
-      break;
+      return getDrinkFirstLetter(searchInput);
     }
   };
 
@@ -111,6 +114,7 @@ class SearchBar extends Component {
           data-testid="exec-search-btn"
           type="button"
           onClick={ this.handleButtonClick }
+          disabled={ !this.isButtonDisabled() }
         >
           Search
         </button>
