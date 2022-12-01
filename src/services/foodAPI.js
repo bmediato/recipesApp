@@ -23,3 +23,9 @@ export const getFoodFirstLetter = async (firstLetter) => {
   const response = await request.json();
   return response.meals;
 };
+
+export const getMeal = async () => {
+  const url = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+  const response = await url.json();
+  return response.meals;
+};
