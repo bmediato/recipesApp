@@ -5,11 +5,9 @@ import { act } from 'react-dom/test-utils';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 import App from '../App';
 import { MOCKED_DRINKS,
-  FAILED_MOCK_DRINKS,
-  MOCKED_ONE_DRINK,
   MOCKED_MEALS,
-  FAILED_MOCK_MEALS,
-  MOCKED_ONE_MEAL } from './helpers/MockData';
+  MOCKED_ONE_MEAL,
+  MOCKED_ONE_DRINK } from './helpers/MockData';
 
 const dataTestSearchInput = 'search-input';
 const dataTestButtonSearch = 'exec-search-btn';
@@ -133,6 +131,7 @@ describe('Testes relacionados ao SearchBar', () => {
       expect(fetch).toHaveBeenLastCalledWith('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a');
     },
   );
+
   test(
     'Verifica se quando a API retorna com apenas uma receita a página é redirecionada para o link correto',
     async () => {
@@ -149,8 +148,23 @@ describe('Testes relacionados ao SearchBar', () => {
       await waitFor(() => {
         expect(history.location.pathname).toBe('/meals/52958');
       });
+
+      jest.clearAllMocks();
+      act(() => {
+        history.push('/drinks');
+      });
+      jest.spyOn(global, 'fetch');
+      global.fetch.mockResolvedValue({
+        json: jest.fn().mockResolvedValue(MOCKED_ONE_DRINK),
+      });
+      userEvent.click(screen.getByTestId(dataTestSearchIcon));
+      fazProcuraNoSearchBar(dataTestIngredientsRadio);
+      await waitFor(() => {
+        expect(history.location.pathname).toBe('/drinks/11524');
+      });
     },
   );
+
   test(
     'Verifica se o componente esta renderizando as receitas corretamente na página meals',
     async () => {
@@ -165,6 +179,7 @@ describe('Testes relacionados ao SearchBar', () => {
       expect(screen.getByTestId('0-card-img')).toHaveAttribute('src', 'https://www.themealdb.com/images/media/meals/1529444830.jpg');
     },
   );
+
   test(
     'Verifica se o componente esta renderizando as receitas corretamente na página drinks',
     async () => {
@@ -179,6 +194,7 @@ describe('Testes relacionados ao SearchBar', () => {
       expect(screen.getByTestId('0-card-img')).toHaveAttribute('src', 'https://www.thecocktaildb.com/images/media/drink/rptuxy1472669372.jpg');
     },
   );
+
   test(
     'Verifica se quando a API retornar mais do que 12 receitas, o componente renderiza apenas 12',
     async () => {
