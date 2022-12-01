@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { foodID } from '../services/foodAPI';
 import { drinkID } from '../services/drinkAPI';
+import ButtonStartRecipe from './ButtonStartRecipe';
+import './css/buttonStart.css';
 
 export default function RecipeDetails({ value }) {
   const history = useHistory();
@@ -23,10 +25,13 @@ export default function RecipeDetails({ value }) {
 
   useEffect(() => {
     fetchId();
-  });
+  }, []);
 
   return (
-    <div>RecipeDetails</div>
+    <>
+      <div>RecipeDetails</div>
+      <ButtonStartRecipe />
+    </>
   );
 }
 
