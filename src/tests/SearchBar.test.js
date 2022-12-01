@@ -133,7 +133,7 @@ describe('Testes relacionados ao SearchBar', () => {
   );
 
   test(
-    'Verifica se quando a API retorna com apenas uma receita a página é redirecionada para o link correto',
+    'Verifica se a API retornar apenas uma receita, a página é redirecionada para o link correto',
     async () => {
       jest.spyOn(global, 'fetch');
       global.fetch.mockResolvedValue({
@@ -166,7 +166,7 @@ describe('Testes relacionados ao SearchBar', () => {
   );
 
   test(
-    'Verifica se o componente esta renderizando as receitas corretamente na página meals',
+    'Verifica se o componente está renderizando as receitas corretamente na página meals',
     async () => {
       jest.spyOn(global, 'fetch');
       global.fetch.mockResolvedValue({
@@ -196,7 +196,7 @@ describe('Testes relacionados ao SearchBar', () => {
   );
 
   test(
-    'Verifica se quando a API retornar mais do que 12 receitas, o componente renderiza apenas 12',
+    'Verifica se a API retornar mais do que 12 receitas, o componente renderiza apenas 12',
     async () => {
       jest.spyOn(global, 'fetch');
       global.fetch.mockResolvedValue({
