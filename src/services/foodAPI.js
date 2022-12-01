@@ -23,3 +23,19 @@ export const getFoodFirstLetter = async (firstLetter) => {
   const response = await request.json();
   return response.meals;
 };
+
+export const getFoodMealsCategories = async () => {
+  const request = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+  const response = await request.json();
+  const categories = response.meals;
+  if (!categories) return [];
+  return categories;
+};
+
+export const getFoodDrinksCategories = async () => {
+  const request = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
+  const response = await request.json();
+  const categories = response.drinks;
+  if (!categories) return [];
+  return categories;
+};
