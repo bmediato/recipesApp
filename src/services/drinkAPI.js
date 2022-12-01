@@ -24,3 +24,9 @@ export const getDrinkFirstLetter = async (firstLetter) => {
   const response = await request.json();
   return response.drinks;
 };
+
+export const drinkID = async (id) => {
+  const request = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+  const response = await request.json();
+  return response;
+};
