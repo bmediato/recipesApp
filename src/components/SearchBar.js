@@ -57,13 +57,15 @@ class SearchBar extends Component {
     const { history, page } = this.props;
     const NUMBER_MAX_ARRAY = 11;
     const recipes = await this.fetchRecipes();
-    console.log(recipes);
     if (recipes.length > NUMBER_MAX_ARRAY) {
-      // Aqui o splice serve para caso o array seja maior do que 12, ele tirar os elementos excedentes
+      /* Aqui o splice serve para caso o array seja maior do que 12,
+      ele vai retirar os elementos do indice 12 até o ultimo */
       recipes
-        .splice(NUMBER_MAX_ARRAY + 1, recipes.length);
+        .splice(NUMBER_MAX_ARRAY + 1, recipes.length - 1);
     }
     switch (recipes.length) {
+    case 0:
+      return global.alert('Sorry, we haven\'t found any recipes for these filters.');
     case 1:
     {
       const recipeId = recipes[0].idMeal || recipes[0].idDrink;
