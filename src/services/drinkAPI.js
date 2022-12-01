@@ -1,7 +1,7 @@
 export const getDrinkIngredient = async (ingredient) => {
   const request = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`);
   const response = await request.json();
-  const recipes = response.ingredients;
+  const recipes = response.drinks;
   if (!recipes) return [];
   return recipes;
 };
@@ -23,4 +23,10 @@ export const getDrinkFirstLetter = async (firstLetter) => {
   const request = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${firstLetter}`);
   const response = await request.json();
   return response.drinks;
+};
+
+export const drinkID = async (id) => {
+  const request = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+  const response = await request.json();
+  return response;
 };

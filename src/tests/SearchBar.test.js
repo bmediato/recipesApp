@@ -1,22 +1,27 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
 import App from '../App';
+import { MOCKED_DRINKS,
+  MOCKED_MEALS,
+  MOCKED_ONE_MEAL,
+  MOCKED_ONE_DRINK } from './helpers/MockData';
 
 const dataTestSearchInput = 'search-input';
 const dataTestButtonSearch = 'exec-search-btn';
 const dataTestFistLetterRadio = 'first-letter-search-radio';
 const dataTestIngredientsRadio = 'ingredient-search-radio';
 const dataTestNameRadio = 'name-search-radio';
+const dataTestSearchIcon = 'search-top-btn';
 
 const renderizaSearchBar = (rota) => {
   const { history } = renderWithRouterAndRedux(<App />);
   act(() => {
     history.push(rota);
   });
-  userEvent.click(screen.getByTestId('search-top-btn'));
+  userEvent.click(screen.getByTestId(dataTestSearchIcon));
 };
 
 const fazProcuraNoSearchBar = (radio) => {
@@ -28,11 +33,8 @@ const fazProcuraNoSearchBar = (radio) => {
 };
 
 describe('Testes relacionados ao SearchBar', () => {
-  beforeEach(() => {
-    jest.spyOn(global, 'fetch');
-    global.fetch.mockResolvedValue({
-      json: jest.fn().mockResolvedValue({ mock: 'eu sou um mock' }),
-    });
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   test('Verifica se a SearchBar só é renderizada no momento certo', () => {
@@ -42,7 +44,7 @@ describe('Testes relacionados ao SearchBar', () => {
     });
     expect(screen.queryByTestId(dataTestSearchInput)).not.toBeInTheDocument();
 
-    userEvent.click(screen.getByTestId('search-top-btn'));
+    userEvent.click(screen.getByTestId(dataTestSearchIcon));
     expect(screen.queryByTestId(dataTestSearchInput)).toBeInTheDocument();
   });
 
@@ -64,6 +66,10 @@ describe('Testes relacionados ao SearchBar', () => {
   test(
     'Verifica se a chamada da API é feita no endpoint correto em cada ocasião na página "/meals"',
     () => {
+      jest.spyOn(global, 'fetch');
+      global.fetch.mockResolvedValue({
+        json: jest.fn().mockResolvedValue(MOCKED_MEALS),
+      });
       renderizaSearchBar('/meals');
       fazProcuraNoSearchBar(dataTestNameRadio);
       expect(fetch).toHaveBeenCalledWith('https://www.themealdb.com/api/json/v1/1/search.php?s=abacate');
@@ -106,6 +112,10 @@ describe('Testes relacionados ao SearchBar', () => {
   test(
     'Verifica se a chamada da API é feita no endpoint correto em cada ocasião na página "/drinks"',
     () => {
+      jest.spyOn(global, 'fetch');
+      global.fetch.mockResolvedValue({
+        json: jest.fn().mockResolvedValue(MOCKED_DRINKS),
+      });
       renderizaSearchBar('/drinks');
       fazProcuraNoSearchBar(dataTestNameRadio);
       expect(fetch).toHaveBeenCalledWith('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=abacate');
@@ -119,6 +129,83 @@ describe('Testes relacionados ao SearchBar', () => {
       userEvent.click(screen.getByTestId(dataTestFistLetterRadio));
       userEvent.click(screen.getByTestId(dataTestButtonSearch));
       expect(fetch).toHaveBeenLastCalledWith('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a');
+    },
+  );
+
+  test(
+    'Verifica se a API retornar apenas uma receita, a página é redirecionada para o link correto',
+    async () => {
+      jest.spyOn(global, 'fetch');
+      global.fetch.mockResolvedValue({
+        json: jest.fn().mockResolvedValue(MOCKED_ONE_MEAL),
+      });
+      const { history } = renderWithRouterAndRedux(<App />);
+      act(() => {
+        history.push('/meals');
+      });
+      userEvent.click(screen.getByTestId(dataTestSearchIcon));
+      fazProcuraNoSearchBar(dataTestIngredientsRadio);
+      await waitFor(() => {
+        expect(history.location.pathname).toBe('/meals/52958');
+      });
+
+      jest.clearAllMocks();
+      act(() => {
+        history.push('/drinks');
+      });
+      jest.spyOn(global, 'fetch');
+      global.fetch.mockResolvedValue({
+        json: jest.fn().mockResolvedValue(MOCKED_ONE_DRINK),
+      });
+      userEvent.click(screen.getByTestId(dataTestSearchIcon));
+      fazProcuraNoSearchBar(dataTestIngredientsRadio);
+      await waitFor(() => {
+        expect(history.location.pathname).toBe('/drinks/11524');
+      });
+    },
+  );
+
+  test(
+    'Verifica se o componente está renderizando as receitas corretamente na página meals',
+    async () => {
+      jest.spyOn(global, 'fetch');
+      global.fetch.mockResolvedValue({
+        json: jest.fn().mockResolvedValue(MOCKED_MEALS),
+      });
+      renderizaSearchBar('/meals');
+      fazProcuraNoSearchBar(dataTestIngredientsRadio);
+      expect(await screen.findByTestId('0-recipe-card')).toBeInTheDocument();
+      expect(screen.getByTestId('0-card-name')).toHaveTextContent('Beef Lo Mein');
+      expect(screen.getByTestId('0-card-img')).toHaveAttribute('src', 'https://www.themealdb.com/images/media/meals/1529444830.jpg');
+    },
+  );
+
+  test(
+    'Verifica se o componente esta renderizando as receitas corretamente na página drinks',
+    async () => {
+      jest.spyOn(global, 'fetch');
+      global.fetch.mockResolvedValue({
+        json: jest.fn().mockResolvedValue(MOCKED_DRINKS),
+      });
+      renderizaSearchBar('/drinks');
+      fazProcuraNoSearchBar(dataTestIngredientsRadio);
+      expect(await screen.findByTestId('0-recipe-card')).toBeInTheDocument();
+      expect(screen.getByTestId('0-card-name')).toHaveTextContent('A True Amaretto Sour');
+      expect(screen.getByTestId('0-card-img')).toHaveAttribute('src', 'https://www.thecocktaildb.com/images/media/drink/rptuxy1472669372.jpg');
+    },
+  );
+
+  test(
+    'Verifica se a API retornar mais do que 12 receitas, o componente renderiza apenas 12',
+    async () => {
+      jest.spyOn(global, 'fetch');
+      global.fetch.mockResolvedValue({
+        json: jest.fn().mockResolvedValue(MOCKED_MEALS),
+      });
+      renderizaSearchBar('/meals');
+      fazProcuraNoSearchBar(dataTestIngredientsRadio);
+      const allRecipes = await screen.findAllByAltText('Imagem ilustrativa da receita');
+      expect(allRecipes).toHaveLength(12);
     },
   );
 });
