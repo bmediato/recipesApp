@@ -54,8 +54,10 @@ class SearchBar extends Component {
   };
 
   handleButtonClick = async () => {
+    const { history, page } = this.props;
     const recipes = await this.fetchRecipes();
     console.log(recipes);
+    if (recipes.length === 1) return history.push(`${page}/${recipes[0].idMeal}`);
     // this.setState({ recipes });
   };
 
@@ -124,12 +126,13 @@ class SearchBar extends Component {
 }
 
 SearchBar.propTypes = {
-  page: PropTypes.string.isRequired,
   history: PropTypes.shape({
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired,
     }),
+    push: PropTypes.func,
   }).isRequired,
+  page: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
