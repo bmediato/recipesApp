@@ -12,7 +12,8 @@ export const getDrinkName = async (name) => {
 
 export const getDrinkFirstLetter = async (firstLetter) => {
   if (firstLetter.length !== 1) {
-    return global.alert('Your search must have only 1 (one) character');
+    global.alert('Your search must have only 1 (one) character');
+    return [];
   }
 
   const request = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${firstLetter}`);
