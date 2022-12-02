@@ -24,8 +24,7 @@ export const getFoodFirstLetter = async (firstLetter) => {
   return response.meals;
 };
 
-
-export const getFoodMealsCategories = async () => {
+export const getMealsCategories = async () => {
   const request = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
   const response = await request.json();
   const categories = response.meals;
@@ -33,12 +32,13 @@ export const getFoodMealsCategories = async () => {
   return categories;
 };
 
-export const getFoodDrinksCategories = async () => {
+export const getDrinksCategories = async () => {
   const request = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
   const response = await request.json();
   const categories = response.drinks;
   if (!categories) return [];
   return categories;
+};
 
 export const foodID = async (id) => {
   const request = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
