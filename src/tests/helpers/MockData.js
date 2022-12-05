@@ -170,3 +170,34 @@ export const MOCKED_ONE_MEAL = { meals: [{
   strMealThumb: 'https://www.themealdb.com/images/media/meals/1544384070.jpg',
   idMeal: '52958',
 }] };
+
+export const MOCKE_CATEGORIES_MEALS = {
+  meals: [
+    {
+      strCategory: 'Beef',
+    },
+    {
+      strCategory: 'Breakfast',
+    },
+    {
+      strCategory: 'Chicken',
+    },
+    {
+      strCategory: 'Dessert',
+    },
+    {
+      strCategory: 'Goat',
+    },
+    {
+      strCategory: 'Lamb',
+    },
+    {
+      strCategory: 'Miscellaneous',
+    },
+    {
+      strCategory: 'Pasta',
+    },
+    {
+      strCategory: 'Pork',
+    },
+  ] };

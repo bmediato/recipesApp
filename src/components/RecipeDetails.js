@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { foodID } from '../services/foodAPI';
 import { drinkID } from '../services/drinkAPI';
 import ButtonStartRecipe from './ButtonStartRecipe';
+import { saveId } from '../redux/actions';
 import './css/buttonStart.css';
 
 export default function RecipeDetails({ value }) {
+  const dispatch = useDispatch();
   const history = useHistory();
-  console.log(history);
   const location = history.location.pathname;
-  console.log(location);
   const id = location.split('/')[2];
-  console.log(id);
 
   const fetchId = async () => {
     if (value === 'meals') {
@@ -25,6 +25,7 @@ export default function RecipeDetails({ value }) {
 
   useEffect(() => {
     fetchId();
+    dispatch(saveId(id));
   }, []);
 
   return (

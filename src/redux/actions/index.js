@@ -1,5 +1,6 @@
 export const SHOW_RECIPES = 'SHOW_RECIPES';
 export const SAVE_PAGE = 'SAVE_PAGE';
+export const SAVE_ID = 'SAVE_ID';
 
 export const savePage = (payload) => ({
   type: SAVE_PAGE,
@@ -8,6 +9,11 @@ export const savePage = (payload) => ({
 
 export const saveShowRecipes = (payload) => ({
   type: SHOW_RECIPES,
+  payload,
+});
+
+export const saveId = (payload) => ({
+  type: SAVE_ID,
   payload,
 });
 

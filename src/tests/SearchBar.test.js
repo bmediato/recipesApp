@@ -7,7 +7,8 @@ import App from '../App';
 import { MOCKED_DRINKS,
   MOCKED_MEALS,
   MOCKED_ONE_MEAL,
-  MOCKED_ONE_DRINK } from './helpers/MockData';
+  MOCKED_ONE_DRINK,
+  MOCKE_CATEGORIES_MEALS } from './helpers/MockData';
 
 const dataTestSearchInput = 'search-input';
 const dataTestButtonSearch = 'exec-search-btn';
@@ -137,7 +138,8 @@ describe('Testes relacionados ao SearchBar', () => {
     async () => {
       jest.spyOn(global, 'fetch');
       global.fetch.mockResolvedValue({
-        json: jest.fn().mockResolvedValue(MOCKED_ONE_MEAL),
+        json: jest.fn().mockResolvedValue(MOCKED_ONE_MEAL)
+          .mockResolvedValueOnce(MOCKE_CATEGORIES_MEALS),
       });
       const { history } = renderWithRouterAndRedux(<App />);
       act(() => {
@@ -200,12 +202,14 @@ describe('Testes relacionados ao SearchBar', () => {
     async () => {
       jest.spyOn(global, 'fetch');
       global.fetch.mockResolvedValue({
-        json: jest.fn().mockResolvedValue(MOCKED_MEALS),
+        json: jest.fn().mockResolvedValue(MOCKED_MEALS)
+          .mockResolvedValueOnce(MOCKE_CATEGORIES_MEALS),
       });
+
       renderizaSearchBar('/meals');
-      fazProcuraNoSearchBar(dataTestIngredientsRadio);
-      const allRecipes = await screen.findAllByAltText('Imagem ilustrativa da receita');
-      expect(allRecipes).toHaveLength(12);
+      fazProcuraNoSearchBar(dataTestNameRadio);
+      screen.logTestingPlaygroundURL();
+      await waitFor(expect(await screen.findAllByAltText('Imagem ilustrativa da receita')).toHaveLength(12), 1000);
     },
   );
 });
