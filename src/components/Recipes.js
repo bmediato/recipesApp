@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getDrinksCategories, getMealsCategories } from '../services/foodAPI';
+import { getDrinksCategories, getMealsCategories, getMeal } from '../services/foodAPI';
 import { savePage } from '../redux/actions';
 import Header from './Header';
+import { getDrink } from '../services/drinkAPI';
 import Footer from './Footer';
 
 class Recipes extends Component {
   state = {
     categories: [],
+    recipes: [],
   };
 
   async componentDidMount() {
@@ -18,19 +20,23 @@ class Recipes extends Component {
     dispatch(savePage(link));
     const NUMBER_MAX_ARRAY = 5;
     let categories = [];
+    let recipes = [];
     if (url === '/meals') {
       categories = await getMealsCategories();
+      recipes = await getMeal();
     }
     if (url === '/drinks') {
       categories = await getDrinksCategories();
+      recipes = await getDrink();
     }
     categories.splice(NUMBER_MAX_ARRAY, categories.length - 1);
-    this.setState({ categories });
+    this.setState({ categories, recipes });
   }
 
   render() {
     const { history, page } = this.props;
-    const { categories } = this.state;
+    const { categories, recipes } = this.state;
+    const max = 12;
     return (
       <div>
         <Header
@@ -52,6 +58,24 @@ class Recipes extends Component {
               />
             </label>))}
         </form>
+        <ul>
+          {
+            recipes.slice(0, max).map((element, index) => (
+              <li data-testid={ `${index}-recipe-card` } key={ index }>
+                <img
+                  alt={ `Recipes ${page}` }
+                  src={ element.strDrinkThumb || element.strMealThumb }
+                  data-testid={ `${index}-card-img` }
+                />
+                <p
+                  data-testid={ `${index}-card-name` }
+                >
+                  { element.strDrink || element.strMeal }
+                </p>
+              </li>
+            ))
+          }
+        </ul>
         <Footer />
       </div>
     );
