@@ -22,7 +22,6 @@ export default function RecipeDetails({ value }) {
 
   useEffect(() => {
     fetchId();
-    // dispatch(saveId(id));
   }, []);
 
   return (
