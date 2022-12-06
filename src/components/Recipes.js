@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getDrinksCategories, getMealsCategories } from '../services/foodAPI';
-import { savePage } from '../redux/actions';
+import { getMealsCategories,
+  getMeal,
+  searchCategoriesMeals } from '../services/foodAPI';
+import { savePage, saveRecipes } from '../redux/actions';
 import Header from './Header';
+import { getDrink,
+  getDrinksCategories,
+  searchCategoriesDrink } from '../services/drinkAPI';
 import Footer from './Footer';
 
 class Recipes extends Component {
   state = {
     categories: [],
+    defaultRecipes: [],
   };
 
   async componentDidMount() {
@@ -20,17 +26,41 @@ class Recipes extends Component {
     let categories = [];
     if (url === '/meals') {
       categories = await getMealsCategories();
+      const recipes = await getMeal();
+      this.setState({ defaultRecipes: recipes });
+      dispatch(saveRecipes(recipes));
     }
     if (url === '/drinks') {
       categories = await getDrinksCategories();
+      const recipes = await getDrink();
+      this.setState({ defaultRecipes: recipes });
+      dispatch(saveRecipes(recipes));
     }
     categories.splice(NUMBER_MAX_ARRAY, categories.length - 1);
     this.setState({ categories });
   }
 
+  allFilters = () => {
+    const { defaultRecipes } = this.state;
+    const { dispatch } = this.props;
+    dispatch(saveRecipes(defaultRecipes));
+  };
+
+  onClickRadioButton = async ({ target }) => {
+    const { page, dispatch } = this.props;
+    if (page === 'drinks') {
+      const recipes = await searchCategoriesDrink(target.value);
+      return dispatch(saveRecipes(recipes));
+    }
+    const recipes = await searchCategoriesMeals(target.value);
+    console.log(recipes);
+    return dispatch(saveRecipes(recipes));
+  };
+
   render() {
-    const { history, page } = this.props;
+    const { history, page, recipes } = this.props;
     const { categories } = this.state;
+    const max = 12;
     return (
       <div>
         <Header
@@ -40,18 +70,45 @@ class Recipes extends Component {
           imgSearch
         />
         <form>
+          <button
+            type="button"
+            data-testid="All-category-filter"
+            onClick={ this.allFilters }
+          >
+            All
+          </button>
+
           { categories.map((category) => (
-            <label htmlFor="categories" key={ category.strCategory }>
+            <label htmlFor={ category.strCategory } key={ category.strCategory }>
               {category.strCategory}
               <input
                 type="radio"
                 data-testid={ `${category.strCategory}-category-filter` }
-                id="categories"
+                id={ category.strCategory }
                 name="radioInput"
                 value={ category.strCategory }
+                onClick={ this.onClickRadioButton }
               />
             </label>))}
         </form>
+        <ul>
+          {
+            recipes.slice(0, max).map((element, index) => (
+              <li data-testid={ `${index}-recipe-card` } key={ index }>
+                <img
+                  alt={ `Recipes ${page}` }
+                  src={ element.strDrinkThumb || element.strMealThumb }
+                  data-testid={ `${index}-card-img` }
+                />
+                <p
+                  data-testid={ `${index}-card-name` }
+                >
+                  { element.strDrink || element.strMeal }
+                </p>
+              </li>
+            ))
+          }
+        </ul>
         <Footer />
       </div>
     );
@@ -66,10 +123,14 @@ Recipes.propTypes = {
     }),
   }).isRequired,
   page: PropTypes.string.isRequired,
+  recipes: PropTypes.shape({
+    slice: PropTypes.func,
+  }).isRequired,
 };
 
 const mapStateToProps = (state) => ({
   page: state.searchRecipes.page,
+  recipes: state.searchRecipes.recipes,
 });
 
 export default connect(mapStateToProps)(Recipes);

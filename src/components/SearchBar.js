@@ -9,10 +9,11 @@ import {
   getFoodFirstLetter,
   getFoodIngredient,
   getFoodName } from '../services/foodAPI';
+import { saveRecipes } from '../redux/actions';
 
 class SearchBar extends Component {
   state = {
-    recipes: [],
+    // recipes: [],
     searchInput: '',
     radioValue: '',
   };
@@ -54,15 +55,15 @@ class SearchBar extends Component {
   };
 
   handleButtonClick = async () => {
-    const { history, page } = this.props;
-    const NUMBER_MAX_ARRAY = 11;
+    const { history, page, dispatch } = this.props;
+    // const NUMBER_MAX_ARRAY = 11;
     const recipes = await this.fetchRecipes();
-    if (recipes.length > NUMBER_MAX_ARRAY) {
-      /* Aqui o splice serve para caso o array seja maior do que 12,
-      ele vai retirar os elementos do indice 12 até o ultimo */
-      recipes
-        .splice(NUMBER_MAX_ARRAY + 1, recipes.length - 1);
-    }
+    // if (recipes.length > NUMBER_MAX_ARRAY) {
+    //   /* Aqui o splice serve para caso o array seja maior do que 12,
+    //   ele vai retirar os elementos do indice 12 até o ultimo */
+    //   recipes
+    //     .splice(NUMBER_MAX_ARRAY + 1, recipes.length - 1);
+    // }
     switch (recipes.length) {
     case 0:
       return global.alert('Sorry, we haven\'t found any recipes for these filters.');
@@ -72,7 +73,7 @@ class SearchBar extends Component {
       return history.push(`${page}/${recipeId}`);
     }
     default:
-      return this.setState({ recipes });
+      return dispatch(saveRecipes(recipes));
     }
   };
 
@@ -137,7 +138,7 @@ class SearchBar extends Component {
             Search
           </button>
         </form>
-        {recipes.map((recipe, i) => (
+        {/* {recipes.map((recipe, i) => (
           <section
             data-testid={ `${i}-recipe-card` }
             key={ recipe.idMeal || recipe.idDrink }
@@ -152,7 +153,7 @@ class SearchBar extends Component {
             >
               { recipe.strMeal || recipe.strDrink }
             </div>
-          </section>
+          </section> */}
         ))}
       </>
     );

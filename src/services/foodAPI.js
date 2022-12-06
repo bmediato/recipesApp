@@ -24,6 +24,12 @@ export const getFoodFirstLetter = async (firstLetter) => {
   return response.meals;
 };
 
+export const getMeal = async () => {
+  const url = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+  const response = await url.json();
+  return response.meals;
+};
+
 export const getMealsCategories = async () => {
   const request = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
   const response = await request.json();
@@ -32,16 +38,14 @@ export const getMealsCategories = async () => {
   return categories;
 };
 
-export const getDrinksCategories = async () => {
-  const request = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
-  const response = await request.json();
-  const categories = response.drinks;
-  if (!categories) return [];
-  return categories;
-};
-
 export const foodID = async (id) => {
   const request = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
   const response = await request.json();
   return response;
+};
+
+export const searchCategoriesMeals = async (filter) => {
+  const url = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${filter}`);
+  const response = await url.json();
+  return response.meals;
 };
