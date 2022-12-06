@@ -6,6 +6,8 @@ import { drinkID } from '../services/drinkAPI';
 import ButtonStartRecipe from './ButtonStartRecipe';
 import { saveId } from '../redux/actions';
 import './css/buttonStart.css';
+import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 export default function RecipeDetails({ value }) {
   const dispatch = useDispatch();
@@ -32,6 +34,18 @@ export default function RecipeDetails({ value }) {
     <>
       <div>RecipeDetails</div>
       <ButtonStartRecipe />
+      <button data-testid="share-btn" type="button">
+        <img
+          src={ shareIcon }
+          alt="ShareIcon"
+        />
+      </button>
+      <button data-testid="favorite-btn" type="button">
+        <img
+          src={ whiteHeartIcon }
+          alt="ShareIcon"
+        />
+      </button>
     </>
   );
 }
