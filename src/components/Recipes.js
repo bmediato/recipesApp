@@ -15,6 +15,7 @@ class Recipes extends Component {
   state = {
     categories: [],
     defaultRecipes: [],
+    selectedRadio: '',
   };
 
   async componentDidMount() {
@@ -48,12 +49,18 @@ class Recipes extends Component {
 
   onClickRadioButton = async ({ target }) => {
     const { page, dispatch } = this.props;
+    const { selectedRadio, defaultRecipes } = this.state;
+    if (selectedRadio === target.value) {
+      dispatch(saveRecipes(defaultRecipes));
+      return this.setState({ selectedRadio: '' });
+    }
+    this.setState({ selectedRadio: target.value });
+
     if (page === 'drinks') {
       const recipes = await searchCategoriesDrink(target.value);
       return dispatch(saveRecipes(recipes));
     }
     const recipes = await searchCategoriesMeals(target.value);
-    console.log(recipes);
     return dispatch(saveRecipes(recipes));
   };
 
