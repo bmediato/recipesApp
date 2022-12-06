@@ -4,6 +4,8 @@ import { foodID } from '../services/foodAPI';
 import { drinkID } from '../services/drinkAPI';
 import ButtonStartRecipe from './ButtonStartRecipe';
 import './css/buttonStart.css';
+import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 export default function RecipeDetails({ value }) {
   const history = useHistory();
@@ -27,7 +29,21 @@ export default function RecipeDetails({ value }) {
   return (
     <>
       <div>RecipeDetails</div>
+
       <ButtonStartRecipe id={ id } />
+
+      <button data-testid="share-btn" type="button">
+        <img
+          src={ shareIcon }
+          alt="ShareIcon"
+        />
+      </button>
+      <button data-testid="favorite-btn" type="button">
+        <img
+          src={ whiteHeartIcon }
+          alt="ShareIcon"
+        />
+      </button>
     </>
   );
 }
