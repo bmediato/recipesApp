@@ -1,14 +1,11 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { foodID } from '../services/foodAPI';
 import { drinkID } from '../services/drinkAPI';
 import ButtonStartRecipe from './ButtonStartRecipe';
-import { saveId } from '../redux/actions';
 import './css/buttonStart.css';
 
 export default function RecipeDetails({ value }) {
-  const dispatch = useDispatch();
   const history = useHistory();
   const location = history.location.pathname;
   const id = location.split('/')[2];
@@ -25,13 +22,13 @@ export default function RecipeDetails({ value }) {
 
   useEffect(() => {
     fetchId();
-    dispatch(saveId(id));
+    // dispatch(saveId(id));
   }, []);
 
   return (
     <>
       <div>RecipeDetails</div>
-      <ButtonStartRecipe />
+      <ButtonStartRecipe id={ id } />
     </>
   );
 }
