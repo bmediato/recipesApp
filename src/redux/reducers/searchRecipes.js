@@ -1,4 +1,4 @@
-import { SHOW_RECIPES, SAVE_PAGE, SAVE_ID } from '../actions';
+import { SAVE_RECIPES, SAVE_PAGE, SAVE_ID } from '../actions';
 
 const INITIAL_STATE = {
   page: '',
@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 
 function searchRecipes(state = INITIAL_STATE, action) {
   switch (action.type) {
-  case SHOW_RECIPES:
+  case SAVE_RECIPES:
     return {
       ...state,
       recipes: action.payload,

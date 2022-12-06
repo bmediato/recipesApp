@@ -1,4 +1,4 @@
-export const SHOW_RECIPES = 'SHOW_RECIPES';
+export const SAVE_RECIPES = 'SAVE_RECIPE';
 export const SAVE_PAGE = 'SAVE_PAGE';
 export const SAVE_ID = 'SAVE_ID';
 
@@ -7,8 +7,8 @@ export const savePage = (payload) => ({
   payload,
 });
 
-export const saveShowRecipes = (payload) => ({
-  type: SHOW_RECIPES,
+export const saveRecipes = (payload) => ({
+  type: SAVE_RECIPES,
   payload,
 });
 
