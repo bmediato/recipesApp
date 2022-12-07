@@ -30,7 +30,7 @@ export default function RecipeDetails({ value }) {
     <>
       <div>RecipeDetails</div>
 
-      <ButtonStartRecipe id={ id } />
+      <ButtonStartRecipe id={ id } history={ history } />
 
       <button data-testid="share-btn" type="button">
         <img
