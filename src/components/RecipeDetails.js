@@ -7,6 +7,8 @@ import './css/buttonStart.css';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
+const copy = require('clipboard-copy');
+
 export default function RecipeDetails({ value }) {
   const carregando = 'carregando...';
 
@@ -14,6 +16,7 @@ export default function RecipeDetails({ value }) {
     strMeasure2: carregando,
     strMeasure3: carregando,
     strYoutube: 'https://www.youtube.com/watch?v=1IszT_guI08' });
+  const [isLinkCopied, setIsLinkCopied] = useState(false);
 
   const history = useHistory();
   const location = history.location.pathname;
@@ -27,6 +30,13 @@ export default function RecipeDetails({ value }) {
       const drinks = await drinkID(id);
       setReceitas(drinks[0]);
     }
+  };
+
+  const onClickShareButton = () => {
+    const timerToDeletePhrase = 5000;
+    copy(`http://localhost:3000${location}`);
+    setIsLinkCopied(true);
+    setTimeout(() => setIsLinkCopied(false), timerToDeletePhrase);
   };
 
   useEffect(() => {
@@ -96,12 +106,17 @@ export default function RecipeDetails({ value }) {
 
       <ButtonStartRecipe id={ id } history={ history } />
 
-      <button data-testid="share-btn" type="button">
+      <button
+        data-testid="share-btn"
+        type="button"
+        onClick={ onClickShareButton }
+      >
         <img
           src={ shareIcon }
           alt="ShareIcon"
         />
       </button>
+      {isLinkCopied && (<p>Link copied!</p>)}
       <button data-testid="favorite-btn" type="button">
         <img
           src={ whiteHeartIcon }
