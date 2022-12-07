@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { foodID, getMeal } from '../services/foodAPI';
@@ -46,7 +47,6 @@ export default function RecipeDetails({ value }) {
 
   useEffect(() => {
     fetchId();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const listIng = () => {
