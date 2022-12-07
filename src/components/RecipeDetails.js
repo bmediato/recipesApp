@@ -22,7 +22,6 @@ export default function RecipeDetails({ value }) {
   const history = useHistory();
   const location = history.location.pathname;
   const id = location.split('/')[2];
-  console.log(recomendation);
 
   const fetchId = async () => {
     if (value === 'meals') {
@@ -30,6 +29,7 @@ export default function RecipeDetails({ value }) {
       setReceitas(food.meals[0]);
       const getD = await getDrink();
       setRecomendation(getD);
+      console.log(recomendation);
     } if (value === 'drinks') {
       const drinks = await drinkID(id);
       setReceitas(drinks.drinks[0]);
