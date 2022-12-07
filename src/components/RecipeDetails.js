@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { foodID } from '../services/foodAPI';
 import { drinkID } from '../services/drinkAPI';
 import ButtonStartRecipe from './ButtonStartRecipe';
-import { saveId } from '../redux/actions';
 import './css/buttonStart.css';
+import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 export default function RecipeDetails({ value }) {
   const carregando = 'carregando...';
+  
   const [receitas, setReceitas] = useState({ strMeasure1: carregando,
     strMeasure2: carregando,
     strMeasure3: carregando,
     strYoutube: 'https://www.youtube.com/watch?v=1IszT_guI08' });
-  const dispatch = useDispatch();
+  
   const history = useHistory();
   const location = history.location.pathname;
   const id = location.split('/')[2];
-  console.log(receitas);
 
   const fetchId = async () => {
     if (value === 'meals') {
@@ -31,8 +31,6 @@ export default function RecipeDetails({ value }) {
 
   useEffect(() => {
     fetchId();
-    dispatch(saveId(id));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const listIng = () => {
@@ -91,27 +89,27 @@ export default function RecipeDetails({ value }) {
       )}
       <ButtonStartRecipe />
     </div>
-
   );
 
-  // const listDrinkDt = (
-  //   <div key={ receitas.idDrink }>
-  //     <img
-  //       data-testid="recipe-photo"
-  //       src={ receitas.strDrinkThumb }
-  //       alt={ receitas.strDrink }
-  //     />
-  //     <h1 data-testid="recipe-title">{receitas.strDrink}</h1>
-  //     <h4 data-testid="recipe-category">{receitas.strAlcoholic}</h4>
-  //     {ingList}
-  //     <h4 data-testid="instructions">{receitas.strInstructions}</h4>
-  //   </div>
-  // );
+  return (
+    <>
+      <div>{ listRecpDt }</div>
 
-  // if (value === 'meals') {
-  return listRecpDt;
-  //
-  // return listDrinkDt;
+      <ButtonStartRecipe id={ id } />
+
+      <button data-testid="share-btn" type="button">
+        <img
+          src={ shareIcon }
+          alt="ShareIcon"
+        />
+      </button>
+      <button data-testid="favorite-btn" type="button">
+        <img
+          src={ whiteHeartIcon }
+          alt="ShareIcon"
+        />
+      </button>
+    </>
 }
 
 RecipeDetails.propTypes = {}.isRequired;
