@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { getMealsCategories,
   getMeal,
-  searchCategoriesMeals } from '../services/foodAPI';
+  searchCategoriesMeals, foodID } from '../services/foodAPI';
 import { savePage, saveRecipes } from '../redux/actions';
 import Header from './Header';
 import { getDrink,
   getDrinksCategories,
-  searchCategoriesDrink } from '../services/drinkAPI';
+  searchCategoriesDrink, drinkID } from '../services/drinkAPI';
 import Footer from './Footer';
 
 class Recipes extends Component {
@@ -16,6 +17,7 @@ class Recipes extends Component {
     categories: [],
     defaultRecipes: [],
     selectedRadio: '',
+    linkName: '25',
   };
 
   async componentDidMount() {
@@ -64,9 +66,18 @@ class Recipes extends Component {
     return dispatch(saveRecipes(recipes));
   };
 
+  linkNames = (id) => {
+    const { page } = this.props;
+    if (page === 'meals') {
+      return `meals/${id}`;
+    }
+    return `drinks/${id}`;
+  };
+
   render() {
     const { history, page, recipes } = this.props;
     const { categories } = this.state;
+
     const max = 12;
     return (
       <div>
@@ -102,11 +113,13 @@ class Recipes extends Component {
           {
             recipes.slice(0, max).map((element, index) => (
               <li data-testid={ `${index}-recipe-card` } key={ index }>
-                <img
-                  alt={ `Recipes ${page}` }
-                  src={ element.strDrinkThumb || element.strMealThumb }
-                  data-testid={ `${index}-card-img` }
-                />
+                <Link to={ this.linkNames(element.idMeal || element.idDrink) }>
+                  <img
+                    alt={ `Recipes ${page}` }
+                    src={ element.strDrinkThumb || element.strMealThumb }
+                    data-testid={ `${index}-card-img` }
+                  />
+                </Link>
                 <p
                   data-testid={ `${index}-card-name` }
                 >
