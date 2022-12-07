@@ -32,9 +32,18 @@ class Profile extends Component {
   };
 
   getEmail = () => {
-    const user = JSON.parse(localStorage.getItem('user'));
-    const { email } = user;
-    this.setState({ email });
+    const { history } = this.props;
+    try {
+      const user = JSON.parse(localStorage.getItem('user'));
+      if (!user) {
+        throw new Error('Faça o login');
+      }
+      const { email } = user;
+      this.setState({ email });
+    } catch (error) {
+      console.error(error);
+      history.push('/');
+    }
   };
 
   render() {
