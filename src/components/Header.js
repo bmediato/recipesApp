@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
+import SearchBar from './SearchBar';
 
 class Header extends Component {
   constructor() {
@@ -12,7 +13,7 @@ class Header extends Component {
   }
 
   render() {
-    const { title, imgProfile, imgSearch } = this.props;
+    const { title, imgProfile, imgSearch, history } = this.props;
     const { isSearching } = this.state;
     return (
       <header>
@@ -49,7 +50,7 @@ class Header extends Component {
             />
           </button>
         )}
-
+        {isSearching && <SearchBar history={ history } />}
       </header>
     );
   }
