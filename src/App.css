@@ -29,10 +29,10 @@
 }
 */
 
-.meals > .logo {
+.meals>.logo {
   animation: shake 1.5s infinite ease;
   color: aliceblue;
-  font-family: Montserrat , sans-serif;
+  font-family: Montserrat, sans-serif;
   font-size: 3em;
   font-weight: 900;
 }
@@ -75,4 +75,10 @@
   padding: 2rem;
   position: fixed;
   width: 100%;
+}
+
+.rec {
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
 }
