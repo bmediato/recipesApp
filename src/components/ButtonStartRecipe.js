@@ -39,6 +39,8 @@ class ButtonStartRecipe extends Component {
   };
 
   render() {
+    const { history } = this.props;
+    const url = history.location.pathname;
     const { recipeInProgress, recipeIsDone } = this.state;
     return (
       <button
@@ -46,6 +48,9 @@ class ButtonStartRecipe extends Component {
         type="button"
         className="button__start__recipe"
         style={ { display: recipeIsDone ? 'none' : 'flex' } }
+        onClick={ () => {
+          history.push(`${url}/in-progress`);
+        } }
       >
         {recipeInProgress ? 'Continue Recipe' : 'Start Recipe'}
       </button>
@@ -54,6 +59,12 @@ class ButtonStartRecipe extends Component {
 }
 
 ButtonStartRecipe.propTypes = {
+  history: PropTypes.shape({
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+    }),
+    push: PropTypes.func,
+  }).isRequired,
   id: PropTypes.string.isRequired,
 };
 
