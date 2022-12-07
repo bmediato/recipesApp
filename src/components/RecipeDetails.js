@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { foodID } from '../services/foodAPI';
-import { drinkID } from '../services/drinkAPI';
+import { foodID, getMeal } from '../services/foodAPI';
+import { drinkID, getDrink } from '../services/drinkAPI';
 import ButtonStartRecipe from './ButtonStartRecipe';
 import './css/buttonStart.css';
 import shareIcon from '../images/shareIcon.svg';
@@ -11,7 +11,7 @@ const copy = require('clipboard-copy');
 
 export default function RecipeDetails({ value }) {
   const carregando = 'carregando...';
-
+  const [recomendation, setRecomendation] = useState([]);
   const [receitas, setReceitas] = useState({ strMeasure1: carregando,
     strMeasure2: carregando,
     strMeasure3: carregando,
@@ -21,14 +21,19 @@ export default function RecipeDetails({ value }) {
   const history = useHistory();
   const location = history.location.pathname;
   const id = location.split('/')[2];
+  console.log(recomendation);
 
   const fetchId = async () => {
     if (value === 'meals') {
       const food = await foodID(id);
       setReceitas(food.meals[0]);
+      const getD = await getDrink();
+      setRecomendation(getD);
     } if (value === 'drinks') {
       const drinks = await drinkID(id);
       setReceitas(drinks.drinks[0]);
+      const getM = await getMeal();
+      setRecomendation(getM);
     }
   };
 
@@ -41,6 +46,7 @@ export default function RecipeDetails({ value }) {
 
   useEffect(() => {
     fetchId();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const listIng = () => {
