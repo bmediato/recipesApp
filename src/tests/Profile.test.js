@@ -7,11 +7,12 @@ import App from '../App';
 // import Profile from '../components/Profile';
 
 const email = 'teste@teste.com';
+const dataTestEmailInput = 'email-input';
 
 describe('Testes relacionados a pagina de perfil', () => {
   test('Verifica se o email salvo no localStorage aparece na tela', () => {
     const { history } = renderWithRouterAndRedux(<App />);
-    const inputEmail = screen.getByTestId('email-input');
+    const inputEmail = screen.getByTestId(dataTestEmailInput);
     const inputPassword = screen.getByTestId('password-input');
     const button = screen.getByTestId('login-submit-btn');
 
@@ -47,7 +48,7 @@ describe('Testes relacionados a pagina de perfil', () => {
   });
   test('Verifica se o localStorage esta sendo limpo após o logout', () => {
     const { history } = renderWithRouterAndRedux(<App />);
-    const inputEmail = screen.getByTestId('email-input');
+    const inputEmail = screen.getByTestId(dataTestEmailInput);
     const inputPassword = screen.getByTestId('password-input');
     const button = screen.getByTestId('login-submit-btn');
 
@@ -62,7 +63,7 @@ describe('Testes relacionados a pagina de perfil', () => {
 
     const buttonLogout = screen.getByTestId('profile-logout-btn');
     userEvent.click(buttonLogout);
-    expect(screen.getByTestId('email-input')).toBeInTheDocument();
+    expect(screen.getByTestId(dataTestEmailInput)).toBeInTheDocument();
     expect(JSON.parse(localStorage.getItem('user'))).toBeNull();
   });
 });
