@@ -19,6 +19,7 @@ describe('Testes relacionados a pagina de perfil', () => {
     userEvent.click(button);
 
     const saveLocalStorage = JSON.parse(localStorage.getItem('user'));
+    console.log(saveLocalStorage);
     expect(saveLocalStorage.email).toBe(email);
     renderWithRouterAndRedux(<Profile />);
     expect(email).toBeInTheDocument();
