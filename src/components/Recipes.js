@@ -41,7 +41,6 @@ class Recipes extends Component {
     }
     categories.splice(NUMBER_MAX_ARRAY, categories.length - 1);
     this.setState({ categories });
-    linkNames();
   }
 
   allFilters = () => {
@@ -67,33 +66,17 @@ class Recipes extends Component {
     return dispatch(saveRecipes(recipes));
   };
 
-  // linkNames = async () => {
-  //   const { page } = this.props;
-  //   if (page === '/meals') {
-  //     const meal = await getFoodName();
-  //     console.log(meal);
-  //   }
-  //   if (page === '/drinks') {
-  //     const drink = await getDrinkName();
-  //   }
-  // };
-
-  linkNames = (event) => {
+  linkNames = (id) => {
     const { page } = this.props;
-    const { target: { value } } = event;
-    if (page === '/meals') {
-      foodID(value)
-        .then((nameMeal) => this.setState({ linkName: nameMeal.names }));
+    if (page === 'meals') {
+      return `meals/${id}`;
     }
-    if (page === '/drinks') {
-      drinkID(value)
-        .then((nameDrink) => this.setState({ linkName: nameDrink.names }));
-    }
+    return `drinks/${id}`;
   };
 
   render() {
     const { history, page, recipes } = this.props;
-    const { categories, linkName } = this.state;
+    const { categories } = this.state;
 
     const max = 12;
     return (
@@ -130,7 +113,7 @@ class Recipes extends Component {
           {
             recipes.slice(0, max).map((element, index) => (
               <li data-testid={ `${index}-recipe-card` } key={ index }>
-                <Link to={ `${linkName}` }>
+                <Link to={ this.linkNames(element.idMeal || element.idDrink) }>
                   <img
                     alt={ `Recipes ${page}` }
                     src={ element.strDrinkThumb || element.strMealThumb }
