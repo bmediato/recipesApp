@@ -9,12 +9,12 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 
 export default function RecipeDetails({ value }) {
   const carregando = 'carregando...';
-  
+
   const [receitas, setReceitas] = useState({ strMeasure1: carregando,
     strMeasure2: carregando,
     strMeasure3: carregando,
     strYoutube: 'https://www.youtube.com/watch?v=1IszT_guI08' });
-  
+
   const history = useHistory();
   const location = history.location.pathname;
   const id = location.split('/')[2];
@@ -87,7 +87,6 @@ export default function RecipeDetails({ value }) {
           src={ `https://www.youtube.com/embed/${receitas.strYoutube.split('=')[1]}` }
         />
       )}
-      <ButtonStartRecipe />
     </div>
   );
 
@@ -110,6 +109,7 @@ export default function RecipeDetails({ value }) {
         />
       </button>
     </>
+  );
 }
 
 RecipeDetails.propTypes = {}.isRequired;
