@@ -22,10 +22,10 @@ export default function RecipeDetails({ value }) {
   const fetchId = async () => {
     if (value === 'meals') {
       const food = await foodID(id);
-      setReceitas(food.meals[0]);
+      setReceitas(food[0]);
     } if (value === 'drinks') {
       const drinks = await drinkID(id);
-      setReceitas(drinks.drinks[0]);
+      setReceitas(drinks[0]);
     }
   };
 
