@@ -4,13 +4,12 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getMealsCategories,
   getMeal,
-  searchCategoriesMeals,
-  getFoodName, foodID } from '../services/foodAPI';
+  searchCategoriesMeals, foodID } from '../services/foodAPI';
 import { savePage, saveRecipes } from '../redux/actions';
 import Header from './Header';
 import { getDrink,
   getDrinksCategories,
-  searchCategoriesDrink } from '../services/drinkAPI';
+  searchCategoriesDrink, drinkID } from '../services/drinkAPI';
 import Footer from './Footer';
 
 class Recipes extends Component {
@@ -42,6 +41,7 @@ class Recipes extends Component {
     }
     categories.splice(NUMBER_MAX_ARRAY, categories.length - 1);
     this.setState({ categories });
+    linkNames();
   }
 
   allFilters = () => {
@@ -67,15 +67,34 @@ class Recipes extends Component {
     return dispatch(saveRecipes(recipes));
   };
 
-  getNameAndFood = async (event) => {
-    const { linkName } = this.state;
-    getFoodName(value).then((e) => this.setState({ linkName: result }))
+  // linkNames = async () => {
+  //   const { page } = this.props;
+  //   if (page === '/meals') {
+  //     const meal = await getFoodName();
+  //     console.log(meal);
+  //   }
+  //   if (page === '/drinks') {
+  //     const drink = await getDrinkName();
+  //   }
+  // };
+
+  linkNames = (event) => {
+    const { page } = this.props;
+    const { target: { value } } = event;
+    if (page === '/meals') {
+      foodID(value)
+        .then((nameMeal) => this.setState({ linkName: nameMeal.names }));
+    }
+    if (page === '/drinks') {
+      drinkID(value)
+        .then((nameDrink) => this.setState({ linkName: nameDrink.names }));
+    }
   };
 
   render() {
     const { history, page, recipes } = this.props;
     const { categories, linkName } = this.state;
-    console.log(linkName);
+
     const max = 12;
     return (
       <div>
