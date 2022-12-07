@@ -3,17 +3,21 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { foodID } from '../services/foodAPI';
 import { drinkID } from '../services/drinkAPI';
-// import ButtonStartRecipe from './ButtonStartRecipe';
+import ButtonStartRecipe from './ButtonStartRecipe';
 import { saveId } from '../redux/actions';
 import './css/buttonStart.css';
 
 export default function RecipeDetails({ value }) {
-  const [receitas, setReceitas] = useState({});
+  const carregando = 'carregando...';
+  const [receitas, setReceitas] = useState({ strMeasure1: carregando,
+    strMeasure2: carregando,
+    strMeasure3: carregando,
+    strYoutube: 'https://www.youtube.com/watch?v=1IszT_guI08' });
   const dispatch = useDispatch();
   const history = useHistory();
   const location = history.location.pathname;
   const id = location.split('/')[2];
-  const embedId = strYoutube.split('=')[1];
+  console.log(receitas);
 
   const fetchId = async () => {
     if (value === 'meals') {
@@ -50,7 +54,7 @@ export default function RecipeDetails({ value }) {
           data-testid={ `${index}-ingredient-name-and-measure` }
           key={ index }
         >
-          {`${receitas[listMeasure()[i]]}: ${receitas[item]}`}
+          {`${receitas[listMeasure()[index]]}: ${receitas[item]}`}
 
         </li>
       ))}
@@ -58,56 +62,56 @@ export default function RecipeDetails({ value }) {
   );
 
   const listRecpDt = (
-    <div>
-      {receitas.map((i) => (
-        <div key={ i.idMeal }>
-          <img
-            data-testid="recipe-photo"
-            src={ i.strMealThumb }
-            alt={ i.strMeal }
-          />
-          <h1 data-testid="recipe-title">{i.strMeal}</h1>
-          <h4 data-testid="recipe-category">{i.strCategory}</h4>
-          {ingList}
-          <h4
-            data-testid="instructions"
-          >
-            {i.strInstructions}
-          </h4>
-          <iframe
-            data-testid="video"
-            title={ i.strMeal }
-            width="420"
-            height="315"
-            src={ `https://www.youtube.com/embed/${embedId}` }
-          />
-        </div>
-      ))}
+    <div key={ receitas.idMeal || receitas.idDrink }>
+      <img
+        data-testid="recipe-photo"
+        src={ receitas.strMealThumb || receitas.strDrinkThumb }
+        alt={ receitas.strMeal || receitas.strDrink }
+      />
+      <h1 data-testid="recipe-title">{receitas.strMeal || receitas.strDrink}</h1>
+      <h4 data-testid="recipe-category">
+        { receitas.strAlcoholic || receitas.strCategory}
+      </h4>
+      <div>
+        {ingList}
+      </div>
+      <h4
+        data-testid="instructions"
+      >
+        {receitas.strInstructions}
+      </h4>
+      {receitas.strYoutube && (
+        <iframe
+          data-testid="video"
+          title={ receitas.strMeal }
+          width="420"
+          height="315"
+          src={ `https://www.youtube.com/embed/${receitas.strYoutube.split('=')[1]}` }
+        />
+      )}
+      <ButtonStartRecipe />
     </div>
+
   );
 
-  const listDrinkDt = (
-    <div>
-      {receitas.map((i) => (
-        <div key={ i.idDrink }>
-          <img
-            data-testid="recipe-photo"
-            src={ i.strDrinkThumb }
-            alt={ i.strDrink }
-          />
-          <h1 data-testid="recipe-title">{i.strDrink}</h1>
-          <h4 data-testid="recipe-category">{i.strAlcoholic}</h4>
-          {ingList}
-          <h4 data-testid="instructions">{i.strInstructions}</h4>
-        </div>
-      ))}
-    </div>
-  );
+  // const listDrinkDt = (
+  //   <div key={ receitas.idDrink }>
+  //     <img
+  //       data-testid="recipe-photo"
+  //       src={ receitas.strDrinkThumb }
+  //       alt={ receitas.strDrink }
+  //     />
+  //     <h1 data-testid="recipe-title">{receitas.strDrink}</h1>
+  //     <h4 data-testid="recipe-category">{receitas.strAlcoholic}</h4>
+  //     {ingList}
+  //     <h4 data-testid="instructions">{receitas.strInstructions}</h4>
+  //   </div>
+  // );
 
-  if (value === 'meals') {
-    return listRecpDt;
-  }
-  return listDrinkDt;
+  // if (value === 'meals') {
+  return listRecpDt;
+  //
+  // return listDrinkDt;
 }
 
 RecipeDetails.propTypes = {}.isRequired;
