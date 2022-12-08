@@ -32,18 +32,10 @@ class Profile extends Component {
   };
 
   getEmail = () => {
-    const { history } = this.props;
-    try {
-      const user = JSON.parse(localStorage.getItem('user'));
-      if (!user) {
-        throw new Error('Faça o login');
-      }
-      const { email } = user;
-      this.setState({ email });
-    } catch (error) {
-      console.error(error);
-      history.push('/');
-    }
+    const user = JSON.parse(localStorage.getItem('user'))
+      || { email: 'login não cadastrado' };
+    const { email } = user;
+    this.setState({ email });
   };
 
   render() {

@@ -18,7 +18,7 @@ export default function RecipeDetails({ value }) {
     strMeasure3: carregando,
     strYoutube: 'https://www.youtube.com/watch?v=1IszT_guI08' });
   const [isLinkCopied, setIsLinkCopied] = useState(false);
-
+  const num = 6;
   const history = useHistory();
   const location = history.location.pathname;
   const id = location.split('/')[2];
@@ -109,6 +109,28 @@ export default function RecipeDetails({ value }) {
   return (
     <>
       <div>{ listRecpDt }</div>
+      <div className="rec">
+        {recomendation ? recomendation.slice(0, num)
+          .map((item, index) => ((item.strMeal === undefined) ? (
+            <div key={ index } data-testid={ `${index}-recommendation-card` }>
+              <h1 data-testid={ `${index}-recommendation-title` }>{item.strDrink}</h1>
+              <img
+                src={ item.strDrinkThumb }
+                alt={ item.strDrink }
+                style={ { maxWidth: '180px' } }
+              />
+            </div>)
+            : (
+              <div key={ index } data-testid={ `${index}-recommendation-card` }>
+                <h1 data-testid={ `${index}-recommendation-title` }>{item.strMeal}</h1>
+                <img
+                  src={ item.strMealThumb }
+                  alt={ item.strMeal }
+                  style={ { maxWidth: '200px' } }
+                />
+              </div>
+            ))) : null}
+      </div>
 
       <ButtonStartRecipe id={ id } history={ history } />
 
