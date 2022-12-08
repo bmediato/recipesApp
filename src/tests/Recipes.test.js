@@ -1,52 +1,95 @@
 import React from 'react';
-import { findByTestId, findByText, screen } from '@testing-library/react';
+import { findByTestId, findByText, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { act } from 'react-dom/test-utils';
 import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux';
+
 import App from '../App';
+import { MOCK_MEALS, MOCK_DRINKS, DRINKS_CATEGORY, MEALS_CATEGORY, MEALS_DETAILS, DRINKS_DETAILS } from './helpers/MockRecipes';
 
 describe('Testes relacionados a página Recipe', () => {
-  test('Testa as páginas meals e drinks', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test('Testa a páginas meals', async () => {
     const { history } = renderWithRouterAndRedux(<App />);
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(MOCK_MEALS)
+        .mockResolvedValueOnce(MEALS_CATEGORY),
+    });
 
     act(() => {
       history.push('/meals');
     });
 
-    const breakfast = findByTestId('Breakfast-category-filter');
-    userEvent.click(breakfast);
-    const primeira = screen.findByTestId('0-card-name');
-    const ultima = screen.findByTestId('6-card-name');
-    const breakfastPotatoes = screen.findByText('BreakfastPotatoes');
+    await screen.findByText('Breakfast');
+    const burek = screen.getByTestId('1-card-img');
+    expect(burek).toBeInTheDocument();
+    userEvent.click(burek);
+    expect(history.location.pathname).toBe('/meals/53060');
+  });
+  test('Testa a página drinks', async () => {
+    const { history } = renderWithRouterAndRedux(<App />);
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(MOCK_DRINKS)
+        .mockResolvedValueOnce(DRINKS_CATEGORY),
+    });
 
-    expect(primeira).toBeInTheDocument();
-    expect(ultima).toBeInTheDocument();
-    expect(breakfastPotatoes).toBeInTheDocument();
+    act(() => {
+      history.push('/drinks');
+    });
+    await screen.findByText('Shake');
 
-    const buttonAll = screen.findByTestId('All-category-filter');
-    expect(buttonAll).toBeInTheDocument();
-    userEvent.click(buttonAll);
-    const first = screen.findByTestId('0-card-name');
-    const last = screen.findByTestId('11-card-name');
-    const kafteji = findByText('Kafteji');
+    const A1 = screen.getByTestId('1-card-img');
+    expect(A1).toBeInTheDocument();
+    userEvent.click(A1);
+    expect(history.location.pathname).toBe('/drinks/17222');
+  });
+  test('Testa os botões da página meals de categoria', async () => {
+    const { history } = renderWithRouterAndRedux(<App />);
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(MEALS_DETAILS)
+        .mockResolvedValueOnce(MEALS_CATEGORY)
+        .mockResolvedValueOnce(MOCK_MEALS),
+    });
 
-    expect(first).toBeInTheDocument();
-    expect(last).toBeInTheDocument();
-    expect(kafteji).toBeInTheDocument();
+    act(() => {
+      history.push('/meals');
+    });
 
-    const drinksBtn = getByTestId('drinks-bottom-btn');
-    userEvent.click(drinksBtn);
+    await screen.findByText('Goat');
+    const goat = screen.getByTestId('Goat-category-filter');
+    userEvent.click(goat);
+    const all = screen.getByTestId('All-category-filter');
+    userEvent.click(all);
 
-    const shake = screen.findByTestId('Shake-category-filter');
-    expect(shake).toBeInTheDocument();
-    userEvent.click(shake);
-    const firstDrink = screen.findByTestId('0-recipe-card');
-    expect(firstDrink).toBeInTheDocument();
-    const avalanche = screen.findByText('Avalanche');
-    expect(avalanche).toBeInTheDocument();
-    userEvent.click(shake);
-    const a1 = screen.findByText('A1');
-    expect(a1).toBeInTheDocument();
-    userEvent.click(shake);
-    expect(avalanche).toBeInTheDocument();
+    const corba = screen.getByText('Corba');
+    expect(corba).toBeInTheDocument();
+  });
+  test('Testa os botões da página drinks de categoria', async () => {
+    const { history } = renderWithRouterAndRedux(<App />);
+    jest.spyOn(global, 'fetch');
+    global.fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(DRINKS_DETAILS)
+        .mockResolvedValueOnce(DRINKS_CATEGORY)
+        .mockResolvedValueOnce(MOCK_DRINKS),
+    });
+
+    act(() => {
+      history.push('/drinks');
+    });
+
+    await screen.findByText('Other/Unknow');
+    const other = screen.getByTestId('Other/Unknow-category-filter');
+    userEvent.click(other);
+    const all = screen.getByTestId('All-category-filter');
+    userEvent.click(all);
+
+    const A1 = screen.getByText('A1');
+    expect(A1).toBeInTheDocument();
   });
 });

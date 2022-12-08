@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getMealsCategories,
   getMeal,
-  searchCategoriesMeals, foodID } from '../services/foodAPI';
+  searchCategoriesMeals } from '../services/foodAPI';
 import { savePage, saveRecipes } from '../redux/actions';
 import Header from './Header';
 import { getDrink,
   getDrinksCategories,
-  searchCategoriesDrink, drinkID } from '../services/drinkAPI';
+  searchCategoriesDrink } from '../services/drinkAPI';
 import Footer from './Footer';
 
 class Recipes extends Component {
@@ -17,7 +17,6 @@ class Recipes extends Component {
     categories: [],
     defaultRecipes: [],
     selectedRadio: '',
-    linkName: '25',
   };
 
   async componentDidMount() {
