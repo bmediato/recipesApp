@@ -1,30 +1,29 @@
-.btn:disabled,
 .btn,
+.btn:disabled,
 .btn:hover {
-  background-color: #FCC436;
+  background-color: #fcc436;
   border-radius: 5px;
-  margin-top: 20px;
   color: white;
+  margin-top: 20px;
 }
 
 .container {
-  background-image: linear-gradient(to bottom, #382c49 0, #763DCC 55%, white 45%);
+  align-items: center;
+  background-image: linear-gradient(to bottom, #382c49 0, #763dcc 55%, white 45%);
   background-repeat: no-repeat;
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  justify-content: center;
   max-width: 100%;
 }
 
 h1 {
-  margin: 20px;
-  font-weight: 500;
   font-size: 30px;
-  line-height: 20px;
-  /* identical to box height */
-  text-align: center;
+  font-weight: 500;
   letter-spacing: 0.165em;
+  line-height: 20px;
+  margin: 20px;
+  text-align: center;
   text-transform: uppercase;
 }
 
@@ -36,35 +35,32 @@ h4 {
 
 h3 {
   color: black;
+  font-size: 20px;
   font-style: italic;
   font-weight: 500;
-  font-size: 20px;
-  line-height: 20px;
-
-  text-align: center;
   letter-spacing: 0.165em;
+  line-height: 20px;
+  text-align: center;
   text-transform: uppercase;
 }
 
 .inputEm,
 .inputPw {
-  width: 276px;
+  border: 0.5px solid #41197f;
+  border-radius: 5px;
   height: 40px;
   left: 42px;
-  top: 613px;
-
-  border: 0.5px solid #41197F;
-  border-radius: 5px;
   padding: 10px;
+  top: 613px;
+  width: 276px;
 }
 
 .inputEm::placeholder,
 .inputPw::placeholder {
-
+  color: #41197f;
   font-family: 'Epilogue';
+  font-size: 17px;
   font-style: normal;
   font-weight: 300;
-  font-size: 17px;
   line-height: 14px;
-  color: #41197F;
 }
