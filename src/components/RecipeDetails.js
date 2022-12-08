@@ -4,9 +4,9 @@ import { useHistory } from 'react-router-dom';
 import { foodID } from '../services/foodAPI';
 import { drinkID } from '../services/drinkAPI';
 import ButtonStartRecipe from './Buttons/ButtonStartRecipe';
+import ButtonFavorite from './Buttons/ButtonFavorite';
 import './css/buttonStart.css';
 
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import ButtonShare from './Buttons/ButtonShare';
 
 export default function RecipeDetails({ value }) {
@@ -98,13 +98,7 @@ export default function RecipeDetails({ value }) {
 
       <ButtonStartRecipe id={ id } history={ history } />
       <ButtonShare />
-
-      <button data-testid="favorite-btn" type="button">
-        <img
-          src={ whiteHeartIcon }
-          alt="ShareIcon"
-        />
-      </button>
+      <ButtonFavorite receitas={ receitas } />
     </>
   );
 }
