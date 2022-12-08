@@ -10,12 +10,9 @@ import './css/buttonStart.css';
 import ButtonShare from './Buttons/ButtonShare';
 
 export default function RecipeDetails({ value }) {
-  const carregando = 'carregando...';
+  // const carregando = 'carregando...';
   const [recomendation, setRecomendation] = useState([]);
-  const [receitas, setReceitas] = useState({ strMeasure1: carregando,
-    strMeasure2: carregando,
-    strMeasure3: carregando,
-    strYoutube: 'https://www.youtube.com/watch?v=1IszT_guI08' });
+  const [receitas, setReceitas] = useState([]);
   const num = 6;
   const history = useHistory();
   const location = history.location.pathname;
@@ -24,13 +21,12 @@ export default function RecipeDetails({ value }) {
   const fetchId = async () => {
     if (value === 'meals') {
       const food = await foodID(id);
-      setReceitas(food[0]);
+      setReceitas(food);
       const getD = await getDrink();
       setRecomendation(getD);
-      console.log(recomendation);
     } if (value === 'drinks') {
       const drinks = await drinkID(id);
-      setReceitas(drinks[0]);
+      setReceitas(drinks);
       const getM = await getMeal();
       setRecomendation(getM);
     }
@@ -40,70 +36,62 @@ export default function RecipeDetails({ value }) {
     fetchId();
   }, []);
 
-  const listIng = () => {
-    const recipesIngr = Object.keys(receitas).filter((e) => receitas[e] !== null)
-      .filter((item) => receitas[item] !== '').filter((i) => i.includes('strIngredient'));
+  const listIng = (receita) => {
+    const recipesIngr = Object.keys(receita).filter((e) => receita[e] !== null)
+      .filter((item) => receita[item] !== '').filter((i) => i.includes('strIngredient'));
     return recipesIngr;
   };
 
-  const listMeasure = () => {
-    const recipesMs = Object.keys(receitas).filter((e) => receitas[e] !== null)
-      .filter((item) => receitas[item] !== '').filter((i) => i.includes('strMeasure'));
+  const listMeasure = (receita) => {
+    const recipesMs = Object.keys(receita).filter((e) => receita[e] !== null)
+      .filter((item) => receita[item] !== '').filter((i) => i.includes('strMeasure'));
     return recipesMs;
   };
 
-  const ingList = (
-    <ul>
-      {listIng().map((item, index) => (
-        <li
-          data-testid={ `${index}-ingredient-name-and-measure` }
-          key={ index }
-        >
-          {`${receitas[listMeasure()[index]]}: ${receitas[item]}`}
-
-        </li>
-      ))}
-    </ul>
-  );
-
-  const listRecpDt = (
-    <div key={ receitas.idMeal || receitas.idDrink }>
-      <img
-        data-testid="recipe-photo"
-        src={ receitas.strMealThumb || receitas.strDrinkThumb }
-        alt={ receitas.strMeal || receitas.strDrink }
-      />
-      <h1 data-testid="recipe-title">{receitas.strMeal || receitas.strDrink}</h1>
-      <h4 data-testid="recipe-category">
-        { receitas.strAlcoholic || receitas.strCategory}
-      </h4>
-      <div>
-        {ingList}
-      </div>
-      <h4
-        data-testid="instructions"
-      >
-        {receitas.strInstructions}
-      </h4>
-      {receitas.strYoutube && (
-        <iframe
-          data-testid="video"
-          title={ receitas.strMeal }
-          width="420"
-          height="315"
-          src={ `https://www.youtube.com/embed/${receitas.strYoutube.split('=')[1]}` }
-        />
-      )}
-    </div>
-  );
-
-  return (
+  return receitas.map((recipe) => (
     <>
-      <div>{ listRecpDt }</div>
+      <div key={ recipe.idMeal || recipe.idDrink }>
+        <img
+          data-testid="recipe-photo"
+          src={ recipe.strMealThumb || recipe.strDrinkThumb }
+          alt={ recipe.strMeal || recipe.strDrink }
+        />
+        <h1 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h1>
+        <h4 data-testid="recipe-category">
+          { recipe.strAlcoholic || recipe.strCategory}
+        </h4>
+        <div>
+          <ul>
+            {listIng(recipe).map((item, index) => (
+              <li
+                data-testid={ `${index}-ingredient-name-and-measure` }
+                key={ index }
+              >
+                {`${recipe[listMeasure(recipe)[index]]}: ${recipe[item]}`}
+
+              </li>
+            ))}
+          </ul>
+        </div>
+        <h4
+          data-testid="instructions"
+        >
+          {recipe.strInstructions}
+        </h4>
+        {recipe.strYoutube && (
+          <iframe
+            data-testid="video"
+            title={ recipe.strMeal }
+            width="420"
+            height="315"
+            src={ `https://www.youtube.com/embed/${recipe.strYoutube.split('=')[1]}` }
+          />
+        )}
+      </div>
       <div className="rec">
         {recomendation ? recomendation.slice(0, num)
           .map((item, index) => ((item.strMeal === undefined) ? (
-            <div key={ index } data-testid={ `${index}-recommendation-card` }>
+            <div key={ `drink ${index}` } data-testid={ `${index}-recommendation-card` }>
               <h1 data-testid={ `${index}-recommendation-title` }>{item.strDrink}</h1>
               <img
                 src={ item.strDrinkThumb }
@@ -112,7 +100,7 @@ export default function RecipeDetails({ value }) {
               />
             </div>)
             : (
-              <div key={ index } data-testid={ `${index}-recommendation-card` }>
+              <div key={ `meal ${index}` } data-testid={ `${index}-recommendation-card` }>
                 <h1 data-testid={ `${index}-recommendation-title` }>{item.strMeal}</h1>
                 <img
                   src={ item.strMealThumb }
@@ -125,9 +113,9 @@ export default function RecipeDetails({ value }) {
 
       <ButtonStartRecipe id={ id } history={ history } />
       <ButtonShare />
-      <ButtonFavorite receitas={ receitas } />
+      <ButtonFavorite receitas={ recipe } testId="favorite-btn" />
     </>
-  );
+  ));
 }
 
 RecipeDetails.propTypes = {

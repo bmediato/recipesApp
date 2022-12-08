@@ -1,11 +1,19 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../../images/blackHeartIcon.svg';
 
 export default class ButtonFavorite extends Component {
+  state = {
+    isFavorited: false,
+  };
+
+  componentDidMount() {
+    this.checkFavorited();
+  }
+
   saveRecipe = () => {
     const { receitas } = this.props;
-    console.log(receitas);
     const oldLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
     const obj = {
       id: receitas.idDrink || receitas.idMeal,
@@ -18,17 +26,43 @@ export default class ButtonFavorite extends Component {
     };
     const newLocalStorage = [...oldLocalStorage, obj];
     localStorage.setItem('favoriteRecipes', JSON.stringify(newLocalStorage));
+    this.checkFavorited();
+  };
+
+  deleteRecipe = () => {
+    const { receitas } = this.props;
+    const oldLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    console.log(oldLocalStorage);
+    const newLocalStorage = oldLocalStorage
+      .filter((recipe) => {
+        if (receitas.idDrink) return recipe.id !== receitas.idDrink;
+        return recipe.id !== receitas.idMeal;
+      });
+    localStorage.setItem('favoriteRecipes', JSON.stringify(newLocalStorage));
+    this.checkFavorited();
+  };
+
+  checkFavorited = () => {
+    const { receitas } = this.props;
+    const oldLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    const isFavorited = oldLocalStorage.some((recipe) => recipe.id === receitas.idMeal
+    || recipe.id === receitas.idDrink);
+    this.setState({ isFavorited });
   };
 
   render() {
+    const { isFavorited } = this.state;
+    const { testId } = this.props;
     return (
       <button
-        data-testid="favorite-btn"
+        data-testid={ testId }
         type="button"
-        onClick={ this.saveRecipe }
+        onClick={ isFavorited ? this.deleteRecipe : this.saveRecipe }
+        src={ isFavorited ? blackHeartIcon : whiteHeartIcon }
+
       >
         <img
-          src={ whiteHeartIcon }
+          src={ isFavorited ? blackHeartIcon : whiteHeartIcon }
           alt="FavoriteIcon"
         />
       </button>
@@ -48,4 +82,5 @@ ButtonFavorite.propTypes = {
     strMeal: PropTypes.string,
     strMealThumb: PropTypes.string,
   }).isRequired,
+  testId: PropTypes.string.isRequired,
 };

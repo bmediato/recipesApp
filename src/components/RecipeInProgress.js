@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { drinkID } from '../services/drinkAPI';
 import { foodID } from '../services/foodAPI';
 import ButtonShare from './Buttons/ButtonShare';
+import ButtonFavorite from './Buttons/ButtonFavorite';
 
 class RecipeInProgress extends Component {
   state = {
@@ -44,6 +45,8 @@ class RecipeInProgress extends Component {
           </h4>
         </div>
         <ButtonShare />
+        <ButtonFavorite receitas={ recipe } testId="favorite-btn" />
+
       </>
     );
   }
