@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './css/Login.css';
+import tomate from '../images/tomate.png';
 
 export default class Login extends Component {
   constructor() {
@@ -36,9 +38,15 @@ export default class Login extends Component {
   render() {
     const { email, senha } = this.state;
     return (
-      <>
+      <div className="container">
+        <h1>RECIPES</h1>
+        <h4>App</h4>
+        <img src={ tomate } alt="tomate" />
+        <h3>Login</h3>
         <input
           data-testid="email-input"
+          placeholder="Email"
+          className="inputEm"
           type="text"
           name="email"
           value={ email }
@@ -46,7 +54,9 @@ export default class Login extends Component {
         />
 
         <input
+          placeholder="Password"
           data-testid="password-input"
+          className="inputPw"
           type="password"
           name="senha"
           value={ senha }
@@ -56,12 +66,13 @@ export default class Login extends Component {
         <button
           data-testid="login-submit-btn"
           type="button"
+          className="btn"
           disabled={ !this.isButtonEnable() }
           onClick={ this.btnClick }
         >
           Enter
         </button>
-      </>
+      </div>
     );
   }
 }
