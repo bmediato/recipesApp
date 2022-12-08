@@ -75,4 +75,10 @@
   padding: 2rem;
   position: fixed;
   width: 100%;
+
+.rec {
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
+
