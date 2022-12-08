@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
+import rockGlass from '../images/rockGlass.svg';
+import mealIcon from '../images/mealIcon.svg';
+import drinkIcon from '../images/drinkIcon.svg';
 
 class Filter extends Component {
   btnAll = () => {
@@ -24,6 +27,10 @@ class Filter extends Component {
           onClick={ this.btnAll }
         >
           All
+          <img
+            src={ rockGlass }
+            alt="ShareIcon"
+          />
         </button>
 
         <button
@@ -32,6 +39,10 @@ class Filter extends Component {
           onClick={ this.btnMeals }
         >
           Meals
+          <img
+            src={ mealIcon }
+            alt="ShareIcon"
+          />
         </button>
 
         <button
@@ -40,6 +51,10 @@ class Filter extends Component {
           onClick={ this.btnDrinks }
         >
           Drinks
+          <img
+            src={ drinkIcon }
+            alt="ShareIcon"
+          />
         </button>
       </div>
     );
