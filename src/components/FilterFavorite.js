@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import mealIcon from '../images/mealIcon.svg';
 import drinkIcon from '../images/drinkIcon.svg';
 
-class Filter extends Component {
+class FilterFavorite extends Component {
   constructor() {
     super();
     this.state = {
@@ -68,4 +68,4 @@ class Filter extends Component {
   }
 }
 
-export default Filter;
+export default FilterFavorite;
