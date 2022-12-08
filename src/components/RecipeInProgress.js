@@ -46,7 +46,13 @@ class RecipeInProgress extends Component {
         </div>
         <ButtonShare />
         <ButtonFavorite receitas={ recipe } testId="favorite-btn" />
+        <button
+          data-testid="finish-recipe-btn"
+          type="button"
+        >
+          Finalizar receita
 
+        </button>
       </>
     );
   }
