@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Header from './Header';
 import shareIcon from '../images/shareIcon.svg';
+import Filter from './Filter';
+import { Link } from 'react-router-dom';
 
 class DoneRecipes extends Component {
   constructor() {
@@ -20,78 +22,70 @@ class DoneRecipes extends Component {
     return doneRecipes;
   };
 
+  linkNames = (id) => {
+    const { page } = this.props;
+    if (page === 'meals') {
+      return `meals/${id}`;
+    }
+    return `drinks/${id}`;
+  };
+
   render() {
     const { history } = this.props;
     const { doneRecipes } = this.state;
 
     return (
-      <>
+      <div>
         <div>
           <Header
-            history={ history }
+            history={history}
             title="Done Recipes"
             imgProfile
-            imgSearch={ false }
+            imgSearch={false}
           />
         </div>
-        <div>
-          <button
-            type="button"
-            data-testid="filter-by-all-btn"
-          >
-            All
-          </button>
 
-          <button
-            type="button"
-            data-testid="filter-by-meal-btn"
-          >
-            Meals
-          </button>
-
-          <button
-            type="button"
-            data-testid="filter-by-drink-btn"
-          >
-            Drinks
-          </button>
-
-          <ul>
-            {
-              doneRecipes.map((element, index) => (
-                <li key={ id }>
+        <Filter />
+        <ul>
+          {
+            doneRecipes.map((element, index) => (
+              <li key={ id }>
+                <Link to={ this.linkNames(element.idMeal || element.idDrink) }>
                   <img
                     src=""
                     alt=""
                     data-testid={ `${index}-horizontal-image` }
                   />
+                </Link>
+
                   <p data-testid={ `${index}-horizontal-top-text` }>
                     {`${element.nationality} - ${element.category}`}
                   </p>
+
+                <Link to={ this.linkNames(element.idMeal || element.idDrink) }>
                   <p data-testid={ `${index}-horizontal-top-text` }>
                     {element.name}
                   </p>
-                  <p data-testid={ `${index}-horizontal-done-date` }>
-                    {element.doneDate}
-                  </p>
+                </Link>
 
-                  <img
-                    src={ shareIcon }
-                    alt="shareIcon"
-                    data-testid={ `${index}-horizontal-share-btn` }
-                  />
+                <p data-testid={`${index}-horizontal-done-date`}>
+                  {element.doneDate}
+                </p>
 
-                  <div data-testid={ `${index}-${tagName}-horizontal-tag` }>
-                    { element.tags }
-                  </div>
-                </li>
-
-              ))
-            }
-          </ul>
-        </div>
-      </>
-
+                <div data-testid={`${index}-${tagName}-horizontal-tag`}>
+                  {element.tags}
+                </div>
+          
+              </li>
+            ));
+          }
+          <img
+            src={ shareIcon }
+            alt="shareIcon"
+            data-testid={ `${index}-horizontal-share-btn` }
+            />
+        </ul>
+      </div>
     );
   }
 }
