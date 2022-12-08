@@ -16,7 +16,6 @@ export default function RecipeDetails({ value }) {
     strMeasure2: carregando,
     strMeasure3: carregando,
     strYoutube: 'https://www.youtube.com/watch?v=1IszT_guI08' });
-  const [isLinkCopied, setIsLinkCopied] = useState(false);
   const num = 6;
   const history = useHistory();
   const location = history.location.pathname;
