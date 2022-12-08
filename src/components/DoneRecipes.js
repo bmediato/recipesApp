@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Header from './Header';
 import shareIcon from '../images/shareIcon.svg';
 import Filter from './Filter';
-import { Link } from 'react-router-dom';
 
 class DoneRecipes extends Component {
   constructor() {
@@ -38,10 +38,10 @@ class DoneRecipes extends Component {
       <div>
         <div>
           <Header
-            history={history}
+            history={ history }
             title="Done Recipes"
             imgProfile
-            imgSearch={false}
+            imgSearch={ false }
           />
         </div>
 
@@ -58,9 +58,9 @@ class DoneRecipes extends Component {
                   />
                 </Link>
 
-                  <p data-testid={ `${index}-horizontal-top-text` }>
-                    {`${element.nationality} - ${element.category}`}
-                  </p>
+                <p data-testid={ `${index}-horizontal-top-text` }>
+                  {`${element.nationality} - ${element.category}`}
+                </p>
 
                 <Link to={ this.linkNames(element.idMeal || element.idDrink) }>
                   <p data-testid={ `${index}-horizontal-top-text` }>
@@ -68,22 +68,22 @@ class DoneRecipes extends Component {
                   </p>
                 </Link>
 
-                <p data-testid={`${index}-horizontal-done-date`}>
+                <p data-testid={ `${index}-horizontal-done-date` }>
                   {element.doneDate}
                 </p>
 
-                <div data-testid={`${index}-${tagName}-horizontal-tag`}>
+                <div data-testid={ `${index}-${tagName}-horizontal-tag` }>
                   {element.tags}
                 </div>
-          
+
               </li>
-            ));
+            ))
           }
           <img
             src={ shareIcon }
             alt="shareIcon"
             data-testid={ `${index}-horizontal-share-btn` }
-            />
+          />
         </ul>
       </div>
     );
@@ -92,6 +92,7 @@ class DoneRecipes extends Component {
 
 DoneRecipes.propTypes = {
   history: PropTypes.shape({}).isRequired,
+  page: PropTypes.string.isRequired,
 };
 
 export default DoneRecipes;
