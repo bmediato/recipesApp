@@ -1,14 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
+import ButtonStartRecipe from './Buttons/ButtonStartRecipe';
+import ButtonFavorite from './Buttons/ButtonFavorite';
 import { foodID, getMeal } from '../services/foodAPI';
 import { drinkID, getDrink } from '../services/drinkAPI';
-import ButtonStartRecipe from './ButtonStartRecipe';
 import './css/buttonStart.css';
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-
-const copy = require('clipboard-copy');
+import ButtonShare from './Buttons/ButtonShare';
 
 export default function RecipeDetails({ value }) {
   const carregando = 'carregando...';
@@ -26,23 +25,16 @@ export default function RecipeDetails({ value }) {
   const fetchId = async () => {
     if (value === 'meals') {
       const food = await foodID(id);
-      setReceitas(food.meals[0]);
+      setReceitas(food[0]);
       const getD = await getDrink();
       setRecomendation(getD);
       console.log(recomendation);
     } if (value === 'drinks') {
       const drinks = await drinkID(id);
-      setReceitas(drinks.drinks[0]);
+      setReceitas(drinks[0]);
       const getM = await getMeal();
       setRecomendation(getM);
     }
-  };
-
-  const onClickShareButton = () => {
-    const timerToDeletePhrase = 5000;
-    copy(`http://localhost:3000${location}`);
-    setIsLinkCopied(true);
-    setTimeout(() => setIsLinkCopied(false), timerToDeletePhrase);
   };
 
   useEffect(() => {
@@ -133,26 +125,12 @@ export default function RecipeDetails({ value }) {
       </div>
 
       <ButtonStartRecipe id={ id } history={ history } />
-
-      <button
-        data-testid="share-btn"
-        type="button"
-        onClick={ onClickShareButton }
-      >
-        <img
-          src={ shareIcon }
-          alt="ShareIcon"
-        />
-      </button>
-      {isLinkCopied && (<p>Link copied!</p>)}
-      <button data-testid="favorite-btn" type="button">
-        <img
-          src={ whiteHeartIcon }
-          alt="ShareIcon"
-        />
-      </button>
+      <ButtonShare />
+      <ButtonFavorite receitas={ receitas } />
     </>
   );
 }
 
-RecipeDetails.propTypes = {}.isRequired;
+RecipeDetails.propTypes = {
+  value: PropTypes.string.isRequired,
+};
