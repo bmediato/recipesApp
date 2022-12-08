@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { drinkID } from '../services/drinkAPI';
 import { foodID } from '../services/foodAPI';
+import ButtonShare from './Buttons/ButtonShare';
 
 class RecipeInProgress extends Component {
   state = {
@@ -18,6 +19,7 @@ class RecipeInProgress extends Component {
       const [recipe] = await foodID(id);
       return this.setState({ recipe });
     }
+    const [recipe] = await drinkID(id);
     return this.setState({ recipe });
   };
 
@@ -41,7 +43,7 @@ class RecipeInProgress extends Component {
             {recipe.strInstructions}
           </h4>
         </div>
-        <div>fasd</div>
+        <ButtonShare />
       </>
     );
   }
