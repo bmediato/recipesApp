@@ -26,7 +26,7 @@ class Card extends Component {
         </p>
 
         <Link to={ this.linkNames(element.idMeal || element.idDrink) }>
-          <p data-testid={ `${index}-horizontal-top-text` }>
+          <p data-testid={ `${index}-horizontal-name` }>
             {element.name}
           </p>
         </Link>
