@@ -3,15 +3,15 @@ import React, { Component } from 'react';
 
 class Filter extends Component {
   btnAll = () => {
-    // remove os filtros, retorna todas as receitas feitas
+    // remove os filtros,retorna todas as receitas
   };
 
   btnMeals = () => {
-    // retorna todas as receitas de comida feitas
+    // retorna todas as receitas de comida
   };
 
   btnDrinks = () => {
-    // retorna todas as receitas de bebidas feitas
+    // retorna todas as receitas de bebidas
   };
 
   render() {
