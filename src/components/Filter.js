@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 // import PropTypes from 'prop-types';
-import rockGlass from '../images/rockGlass.svg';
 import mealIcon from '../images/mealIcon.svg';
 import drinkIcon from '../images/drinkIcon.svg';
 
 class Filter extends Component {
+  constructor() {
+    super();
+    this.state = {
+      favoriteRecipes: [],
+    };
+  }
+
   btnAll = () => {
     // remove os filtros,retorna todas as receitas
   };
 
   btnMeals = () => {
     // retorna todas as receitas de comida
+    favoriteRecipes.filter
   };
 
   btnDrinks = () => {
@@ -28,7 +35,7 @@ class Filter extends Component {
         >
           All
           <img
-            src={ rockGlass }
+            src={ drinkIcon }
             alt="ShareIcon"
           />
         </button>
