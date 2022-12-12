@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Header from './Header';
-import Filter from './FilterFavorite';
+// import Filter from './FilterFavorite';
 import shareIcon from '../images/shareIcon.svg';
 import ButtonFavorite from './Buttons/ButtonFavorite';
+import mealIcon from '../images/mealIcon.svg';
+import drinkIcon from '../images/drinkIcon.svg';
 
 const copy = require('clipboard-copy');
 
@@ -46,7 +48,43 @@ class FavoriteRecipes extends Component {
           imgProfile
           imgSearch={ false }
         />
-        <Filter />
+        <section>
+          <button
+            type="button"
+            data-testid="filter-by-all-btn"
+            // onClick={ this.btnAll }
+          >
+            All
+            <img
+              src={ drinkIcon }
+              alt="ShareIcon"
+            />
+          </button>
+
+          <button
+            type="button"
+            data-testid="filter-by-meal-btn"
+            // onClick={ this.btnMeals }
+          >
+            Meals
+            <img
+              src={ mealIcon }
+              alt="ShareIcon"
+            />
+          </button>
+
+          <button
+            type="button"
+            data-testid="filter-by-drink-btn"
+            // onClick={ this.btnDrinks }
+          >
+            Drinks
+            <img
+              src={ drinkIcon }
+              alt="ShareIcon"
+            />
+          </button>
+        </section>
         <ul>
           {
             favoriteRecipes.map((element, index) => (
