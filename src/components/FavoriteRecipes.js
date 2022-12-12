@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Header from './Header';
 import Filter from './FilterFavorite';
 import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import ButtonFavorite from './Buttons/ButtonFavorite';
 
 const copy = require('clipboard-copy');
 
@@ -26,28 +26,11 @@ class FavoriteRecipes extends Component {
     this.setState({ favoriteRecipes });
   };
 
-  onClickShareButton = () => {
+  onClickShareButton = (element) => {
     const timerToDeletePhrase = 5000;
-    copy(`http://localhost:3000${element.type}s/${element.id}`);
+    copy(`http://localhost:3000/${element.type}s/${element.id}`);
     this.setState({ isLinkCopied: true });
     setTimeout(() => this.setState({ isLinkCopied: false }), timerToDeletePhrase);
-  };
-
-  saveRecipe = () => {
-    const { receitas } = this.props;
-    console.log(receitas);
-    const oldLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-    const obj = {
-      id: receitas.idDrink || receitas.idMeal,
-      type: receitas.idDrink ? 'drink' : 'meal',
-      nationality: receitas.strArea || '',
-      category: receitas.strCategory || '',
-      alcoholicOrNot: receitas.strAlcoholic || '',
-      name: receitas.strDrink || receitas.strMeal,
-      image: receitas.strDrinkThumb || receitas.strMealThumb,
-    };
-    const newLocalStorage = [...oldLocalStorage, obj];
-    localStorage.setItem('favoriteRecipes', JSON.stringify(newLocalStorage));
   };
 
   render() {
@@ -91,7 +74,7 @@ class FavoriteRecipes extends Component {
                 <button
                   data-testid={ `${index}-horizontal-share-btn` }
                   type="button"
-                  onClick={ this.onClickShareButton }
+                  onClick={ () => this.onClickShareButton(element) }
                   src={ shareIcon }
                 >
                   <img
@@ -100,8 +83,12 @@ class FavoriteRecipes extends Component {
                   />
                 </button>
                 { isLinkCopied && (<p>Link copied!</p>) }
+                <ButtonFavorite
+                  receitas={ element }
+                  testId={ `${index}-horizontal-favorite-btn` }
+                />
 
-                <button
+                {/* <button
                   data-testid={ `${index}-horizontal-favorite-btn` }
                   type="button"
                   onClick={ this.saveRecipe }
@@ -111,7 +98,7 @@ class FavoriteRecipes extends Component {
                     src={ whiteHeartIcon }
                     alt="FavoriteIcon"
                   />
-                </button>
+                </button> */}
               </li>
             ))
           }

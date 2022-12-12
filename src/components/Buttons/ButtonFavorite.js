@@ -36,7 +36,8 @@ export default class ButtonFavorite extends Component {
     const newLocalStorage = oldLocalStorage
       .filter((recipe) => {
         if (receitas.idDrink) return recipe.id !== receitas.idDrink;
-        return recipe.id !== receitas.idMeal;
+        if (receitas.idMeal) return recipe.id !== receitas.idMeal;
+        return recipe.id !== receitas.id;
       });
     localStorage.setItem('favoriteRecipes', JSON.stringify(newLocalStorage));
     this.checkFavorited();
@@ -45,8 +46,14 @@ export default class ButtonFavorite extends Component {
   checkFavorited = () => {
     const { receitas } = this.props;
     const oldLocalStorage = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
-    const isFavorited = oldLocalStorage.some((recipe) => recipe.id === receitas.idMeal
-    || recipe.id === receitas.idDrink);
+    const isFavorited = oldLocalStorage.some((recipe) => {
+      if (receitas.idDrink || receitas.idMeal) {
+        return recipe.id === receitas.idMeal
+    || recipe.id === receitas.idDrink;
+      }
+      return recipe.id === receitas.id;
+    });
+
     this.setState({ isFavorited });
   };
 
@@ -81,6 +88,7 @@ ButtonFavorite.propTypes = {
     strDrinkThumb: PropTypes.string,
     strMeal: PropTypes.string,
     strMealThumb: PropTypes.string,
+    id: PropTypes.string,
   }).isRequired,
   testId: PropTypes.string.isRequired,
 };
