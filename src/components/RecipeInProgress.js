@@ -24,8 +24,18 @@ class RecipeInProgress extends Component {
     return this.setState({ recipe });
   };
 
+  check = ({ target }) => {
+    const { name, checked } = target;
+    if (checked) {
+      this.setState({ [name]: true });
+    } else {
+      this.setState({ [name]: false });
+    }
+  };
+
   render() {
     const { recipe } = this.state;
+    console.log(Object.entries(recipe));
     return (
       <>
         <div key={ recipe.idMeal || recipe.idDrink }>
@@ -43,6 +53,22 @@ class RecipeInProgress extends Component {
           >
             {recipe.strInstructions}
           </h4>
+          {Object.entries(recipe)
+            .filter(([e, i]) => e.includes('strIngredient') && i).map((el, index) => (
+              <label
+                key={ index }
+                data-testid={ `${index}-ingredient-step` }
+                htmlFor={ `${index}-ingredient-step` }
+              >
+                <input
+                  type="checkbox"
+                  id={ `${index}-ingredient-step` }
+                  name="checke"
+                  onChange={ this.check }
+                />
+                {el[1]}
+              </label>
+            ))}
         </div>
         <ButtonShare />
         <ButtonFavorite receitas={ recipe } testId="favorite-btn" />
