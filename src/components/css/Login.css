@@ -9,7 +9,7 @@
 
 .container {
   align-items: center;
-  background-image: linear-gradient(to bottom, #382c49 0, #763dcc 55%, white 45%);
+  background-image: linear-gradient(to bottom, #382c49 0, #763dcc 50%, white 50%);
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
@@ -25,6 +25,12 @@ h1 {
   margin: 20px;
   text-align: center;
   text-transform: uppercase;
+  position: absolute;
+  width: 154.18px;
+  height: 28.83px;
+  left: 30.1%;
+  top: 13.4%;
+
 }
 
 h1,
@@ -34,7 +40,7 @@ h4 {
 }
 
 h3 {
-  color: black;
+  color: #41197f;
   font-size: 20px;
   font-style: italic;
   font-weight: 500;
@@ -52,7 +58,7 @@ h3 {
   left: 42px;
   padding: 10px;
   top: 613px;
-  width: 276px;
+  width: 260px;
 }
 
 .inputEm::placeholder,
@@ -63,4 +69,72 @@ h3 {
   font-style: normal;
   font-weight: 300;
   line-height: 14px;
+}
+
+.input {
+  margin-top: 5px;
+  display: flex;
+  flex-direction: column;
+  height: 90px;
+  justify-content: space-around;
+}
+
+.elipse {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  left: 35%;
+  top: 2%;
+}
+
+.retangulo {
+  position: absolute;
+  width: 180px;
+  height: 40px;
+  left: 30.5%;
+  top: 15.5%;
+}
+
+.band {
+  position: absolute;
+  width: 90px;
+  left: 40.5%;
+  top: 0.8%;
+}
+
+.tomate-img {
+  width: 250px;
+}
+
+.tomate {
+  display: flex;
+  width: 100%;
+  margin: 0;
+  align-items: flex-end;
+  height: 150px;
+  justify-content: center;
+
+}
+
+.coracao {
+  position: absolute;
+  left: 56%;
+  width: 30px;
+  right: 36.25%;
+  top: 3%;
+}
+
+h4 {
+  position: absolute;
+  width: 154.18px;
+  height: 28.83px;
+  left: 44.8%;
+  top: 22.5%;
+
+}
+
+.title {
+  width: 100%;
+  height: 180px;
+  display: flex;
 }
