@@ -10,6 +10,8 @@ import {
   getFoodIngredient,
   getFoodName } from '../services/foodAPI';
 import { saveRecipes } from '../redux/actions';
+// import './css/SearchBar.css';
+import './css/Header.css';
 
 class SearchBar extends Component {
   state = {
@@ -77,58 +79,68 @@ class SearchBar extends Component {
   render() {
     const { searchInput } = this.state;
     return (
-      <form>
-        <input
-          data-testid="search-input"
-          placeholder="Search"
-          type="text"
-          name="searchInput"
-          value={ searchInput }
-          onChange={ this.onInputChange }
-        />
-
-        <label htmlFor="ingredient">
-          Ingredient
+      <div className="div-central">
+        <form>
           <input
-            type="radio"
-            data-testid="ingredient-search-radio"
-            id="ingredient"
-            name="radioInput"
-            value="ingredient"
-            onClick={ this.handleRadioButton }
+            className="inputSearch"
+            data-testid="search-input"
+            placeholder="Search"
+            type="text"
+            name="searchInput"
+            value={ searchInput }
+            onChange={ this.onInputChange }
           />
-        </label>
-        <label htmlFor="name">
-          Name
-          <input
-            type="radio"
-            data-testid="name-search-radio"
-            id="name"
-            name="radioInput"
-            value="name"
-            onClick={ this.handleRadioButton }
-          />
-        </label>
-        <label htmlFor="firstLetter">
-          First letter
-          <input
-            type="radio"
-            data-testid="first-letter-search-radio"
-            id="firstLetter"
-            name="radioInput"
-            value="firstLetter"
-            onClick={ this.handleRadioButton }
-          />
-        </label>
-        <button
-          data-testid="exec-search-btn"
-          type="button"
-          onClick={ this.handleButtonClick }
-          disabled={ !this.isButtonDisabled() }
-        >
-          Search
-        </button>
-      </form>
+          <div className="container-ing">
+            <label htmlFor="ingredient">
+              <input
+                type="radio"
+                data-testid="ingredient-search-radio"
+                id="ingredient"
+                name="radioInput"
+                value="ingredient"
+                onClick={ this.handleRadioButton }
+                className="input-a"
+              />
+              <span>Ingredient</span>
+            </label>
+            <label htmlFor="name">
+              <input
+                type="radio"
+                data-testid="name-search-radio"
+                id="name"
+                name="radioInput"
+                value="name"
+                onClick={ this.handleRadioButton }
+                className="input-a"
+              />
+              <span>Name</span>
+            </label>
+            <label htmlFor="firstLetter">
+              <input
+                type="radio"
+                data-testid="first-letter-search-radio"
+                id="firstLetter"
+                name="radioInput"
+                value="firstLetter"
+                onClick={ this.handleRadioButton }
+                className="input-a"
+              />
+              <span>First letter</span>
+            </label>
+            <div className="btn-sea">
+              <button
+                data-testid="exec-search-btn"
+                type="button"
+                onClick={ this.handleButtonClick }
+                disabled={ !this.isButtonDisabled() }
+                className="btn-search"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
     );
   }
 }

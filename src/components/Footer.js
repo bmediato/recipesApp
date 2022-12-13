@@ -11,6 +11,7 @@ export default class Footer extends Component {
             src={ drinkIcon }
             alt="DrinkIcon"
             data-testid="drinks-bottom-btn"
+            className="drink-icon"
           />
         </a>
         <a href="/meals">
@@ -18,6 +19,7 @@ export default class Footer extends Component {
             src={ mealIcon }
             alt="MealIcon"
             data-testid="meals-bottom-btn"
+            className="meal-icon"
           />
         </a>
       </footer>
