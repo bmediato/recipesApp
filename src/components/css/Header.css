@@ -1,0 +1,87 @@
+.page-title {
+  color: #41197f;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: 0.105em;
+  line-height: 20px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.container-header {
+  background: #fcc436;
+  height: 52px;
+}
+
+.bandeja {
+  bottom: 94.76%;
+  left: 4%;
+  position: absolute;
+  top: 1%;
+  width: 50px;
+}
+
+.vector {
+  bottom: 98.47%;
+  left: 10.2%;
+  position: absolute;
+  top: 1.03%;
+  width: 16px;
+}
+
+.title-rec {
+  color: #41197f;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 300;
+  height: 13.39px;
+  left: 15%;
+  line-height: 20px;
+  position: absolute;
+  text-align: center;
+  text-transform: uppercase;
+  top: 4%;
+}
+
+.img-btn {
+  align-items: center;
+  display: flex;
+  height: 52px;
+  justify-content: flex-end;
+  margin-right: 3.5%;
+}
+
+.profile-btn {
+  height: 26.84px;
+  left: 267px;
+  top: 14px;
+  width: 26.84px;
+
+}
+
+.lupa {
+  border: none;
+  height: 26.84px;
+  left: 267px;
+  top: 14px;
+  width: 26.84px;
+}
+
+.btn-lupa {
+  background-color: #fcc436;
+  border: none;
+}
+
+.prato {
+  width: 35px;
+
+}
+
+.title-all {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 10px;
+}

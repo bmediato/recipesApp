@@ -48,13 +48,13 @@ export default class Login extends Component {
           <img src={ Rectangle2 } alt="retangulo" className="retangulo" />
           <img src={ Vector } alt="coração" className="coracao" />
           <img src={ bandejaCom } alt="bandeja" className="band" />
-          <h1>RECIPES</h1>
-          <h4>App</h4>
+          <h1 className="recipes">RECIPES</h1>
+          <h4 className="app">App</h4>
         </div>
         <div className="tomate">
           <img src={ tomate } alt="tomate" className="tomate-img" />
         </div>
-        <h3>Login</h3>
+        <h3 className="login">Login</h3>
         <div className="input">
           <input
             data-testid="email-input"

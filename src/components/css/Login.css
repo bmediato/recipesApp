@@ -1,6 +1,4 @@
-.btn,
-.btn:disabled,
-.btn:hover {
+.btn, .btn:disabled, .btn:hover {
   background-color: #fcc436;
   border-radius: 5px;
   color: white;
@@ -17,29 +15,28 @@
   max-width: 100%;
 }
 
-h1 {
+.recipes {
   font-size: 30px;
   font-weight: 500;
+  height: 28.83px;
+  left: 30.1%;
   letter-spacing: 0.165em;
   line-height: 20px;
   margin: 20px;
+  position: absolute;
   text-align: center;
   text-transform: uppercase;
-  position: absolute;
-  width: 154.18px;
-  height: 28.83px;
-  left: 30.1%;
   top: 13.4%;
+  width: 154.18px;
 
 }
 
-h1,
-h4 {
-  color: white;
+.recipes, .app {
+  color: #41197f;
   font-style: italic;
 }
 
-h3 {
+.login {
   color: #41197f;
   font-size: 20px;
   font-style: italic;
@@ -50,8 +47,7 @@ h3 {
   text-transform: uppercase;
 }
 
-.inputEm,
-.inputPw {
+.inputEm, .inputPw {
   border: 0.5px solid #41197f;
   border-radius: 5px;
   height: 40px;
@@ -61,10 +57,9 @@ h3 {
   width: 260px;
 }
 
-.inputEm::placeholder,
-.inputPw::placeholder {
+.inputEm::placeholder, .inputPw::placeholder {
   color: #41197f;
-  font-family: 'Epilogue';
+  font-family: Verdana , serif;
   font-size: 17px;
   font-style: normal;
   font-weight: 300;
@@ -72,34 +67,34 @@ h3 {
 }
 
 .input {
-  margin-top: 5px;
   display: flex;
   flex-direction: column;
   height: 90px;
   justify-content: space-around;
+  margin-top: 5px;
 }
 
 .elipse {
-  position: absolute;
-  width: 140px;
   height: 140px;
   left: 35%;
+  position: absolute;
   top: 2%;
+  width: 140px;
 }
 
 .retangulo {
-  position: absolute;
-  width: 180px;
   height: 40px;
   left: 30.5%;
+  position: absolute;
   top: 15.5%;
+  width: 180px;
 }
 
 .band {
-  position: absolute;
-  width: 90px;
   left: 40.5%;
+  position: absolute;
   top: 0.8%;
+  width: 90px;
 }
 
 .tomate-img {
@@ -107,34 +102,34 @@ h3 {
 }
 
 .tomate {
-  display: flex;
-  width: 100%;
-  margin: 0;
   align-items: flex-end;
+  display: flex;
   height: 150px;
   justify-content: center;
+  margin: 0;
+  width: 100%;
 
 }
 
 .coracao {
-  position: absolute;
   left: 56%;
-  width: 30px;
+  position: absolute;
   right: 36.25%;
   top: 3%;
+  width: 30px;
 }
 
-h4 {
-  position: absolute;
-  width: 154.18px;
+.app {
   height: 28.83px;
   left: 44.8%;
+  position: absolute;
   top: 22.5%;
+  width: 154.18px;
 
 }
 
 .title {
-  width: 100%;
-  height: 180px;
   display: flex;
+  height: 180px;
+  width: 100%;
 }
