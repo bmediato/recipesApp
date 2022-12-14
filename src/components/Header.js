@@ -60,7 +60,7 @@ class Header extends Component {
             />
           </button>
         )}
-            {isSearching && <SearchBar history={ history } />}
+
           </div>
         </div>
         <div className="title-all">
@@ -70,6 +70,7 @@ class Header extends Component {
             {title}
           </h1>
         </div>
+        {isSearching && <SearchBar history={ history } />}
       </header>
     );
   }

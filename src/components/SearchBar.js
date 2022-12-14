@@ -10,8 +10,7 @@ import {
   getFoodIngredient,
   getFoodName } from '../services/foodAPI';
 import { saveRecipes } from '../redux/actions';
-// import './css/SearchBar.css';
-import './css/Header.css';
+import './css/SearchBar.css';
 
 class SearchBar extends Component {
   state = {
@@ -79,18 +78,20 @@ class SearchBar extends Component {
   render() {
     const { searchInput } = this.state;
     return (
-      <div className="div-central">
-        <form>
-          <input
-            className="inputSearch"
-            data-testid="search-input"
-            placeholder="Search"
-            type="text"
-            name="searchInput"
-            value={ searchInput }
-            onChange={ this.onInputChange }
-          />
-          <div className="container-ing">
+
+      <form className="div-central">
+        <input
+          className="inputSearch"
+          data-testid="search-input"
+          placeholder="Search"
+          type="text"
+          name="searchInput"
+          value={ searchInput }
+          onChange={ this.onInputChange }
+        />
+        <div className="container-ing">
+          <div className="inputs">
+
             <label htmlFor="ingredient">
               <input
                 type="radio"
@@ -127,20 +128,20 @@ class SearchBar extends Component {
               />
               <span>First letter</span>
             </label>
-            <div className="btn-sea">
-              <button
-                data-testid="exec-search-btn"
-                type="button"
-                onClick={ this.handleButtonClick }
-                disabled={ !this.isButtonDisabled() }
-                className="btn-search"
-              >
-                Search
-              </button>
-            </div>
           </div>
-        </form>
-      </div>
+          <div className="btn-sea">
+            <button
+              data-testid="exec-search-btn"
+              type="button"
+              onClick={ this.handleButtonClick }
+              disabled={ !this.isButtonDisabled() }
+              className="btn-search"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </form>
     );
   }
 }

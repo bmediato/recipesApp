@@ -1,4 +1,67 @@
 .div-central {
-  border: 1px solid black;
+  align-items: center;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.inputSearch {
+  background: white;
+  border: 1px solid #b1b1b1;
+  border-radius: 5px;
+  box-sizing: border-box;
+  height: 40px;
+  width: 338px;
+}
+
+.container-ing {
+  background: #41197f;
+  border-radius: 10px;
+  height: 100px;
+  left: 15%;
+  top: 20%;
+  width: 338px;
+}
+
+.btn-sea {
+  align-items: flex-end;
+  display: flex;
+  height: 60px;
+  justify-content: center;
+}
+
+.btn-search {
+  background: #fcc436;
+  border-radius: 5px;
+  color: white;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  height: 25px;
+  letter-spacing: 0.03em;
+  line-height: 12px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 208.16px;
+}
+
+span {
+  color: white;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  height: 9px;
+  line-height: 9px;
+
+}
+
+.inputs {
+  align-items: center;
+  display: flex;
+  height: 30px;
+  justify-content: space-around;
+}
+
+input [ type = 'radio' ]:checked + .input-a {
+  color: #fcc436;
 }
