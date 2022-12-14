@@ -1,0 +1,85 @@
+.ul-fav {
+  background: white;
+  border: 0.51px solid #b1b1b1;
+  border-radius: 5px;
+  box-sizing: border-box;
+  display: flex;
+  height: 135px;
+  left: 19px;
+  margin: 10px;
+  top: 298px;
+  width: 318px;
+}
+
+.img-f {
+  border-radius: 5px;
+  height: 134.85px;
+  left: 19px;
+  top: 298px;
+  width: 163.35px;
+}
+
+.divau {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bdiv {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.btnB {
+  background-color: white;
+  border: none;
+}
+
+.hamburguer, .suco, .garfo {
+  border: 2.66px solid #fcc436;
+  border-radius: 66.71px;
+  box-sizing: border-box;
+  height: 66.72px;
+  left: 50px;
+  padding: 5px;
+  top: 184.28px;
+  width: 66.72px;
+}
+
+.section {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.p3 {
+  color: #1a1b1c;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.ptitle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5px;
+}
+
+.pp {
+  color: #797d86;
+  font-size: 15px;
+  line-height: 15px;
+}
+
+
+.btnSh {
+  background-color: white;
+  border: none;
+}
+
+.favfav {
+  position: absolute;
+}

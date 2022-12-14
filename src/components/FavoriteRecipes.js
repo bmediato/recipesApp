@@ -5,6 +5,8 @@ import Header from './Header';
 import Filter from './FilterFavorite';
 import shareIcon from '../images/shareIcon.svg';
 import ButtonFavorite from './Buttons/ButtonFavorite';
+import './css/Favorite.css';
+import share1 from '../images/share1.png';
 
 const copy = require('clipboard-copy');
 
@@ -47,48 +49,52 @@ class FavoriteRecipes extends Component {
           imgSearch={ false }
         />
         <Filter />
-        <ul>
+        <ul className="bdiv">
           {
             favoriteRecipes.map((element, index) => (
-              <li key={ index }>
+              <div key={ index } className="ul-fav">
                 <Link to={ `${element.type}s/${element.id}` }>
                   <img
                     src={ element.image }
+                    className="img-f"
                     alt={ `Recipes ${page}` }
                     data-testid={ `${index}-horizontal-image` }
                   />
                 </Link>
-
-                <p data-testid={ `${index}-horizontal-top-text` }>
-                  {`${element.nationality} - 
+                <div className="divau">
+                  <div className="ptitle">
+                    <Link to={ `${element.type}s/${element.id}` }>
+                      <p data-testid={ `${index}-horizontal-name` } className="p3">
+                        {element.name}
+                      </p>
+                    </Link>
+                    <p data-testid={ `${index}-horizontal-top-text` } className="pp">
+                      {`${element.nationality} - 
                   ${element.category} - 
                   ${element.alcoholicOrNot}`}
-                </p>
+                    </p>
 
-                <Link to={ `${element.type}s/${element.id}` }>
-                  <p data-testid={ `${index}-horizontal-name` }>
-                    {element.name}
-                  </p>
-                </Link>
-
-                <button
-                  data-testid={ `${index}-horizontal-share-btn` }
-                  type="button"
-                  onClick={ () => this.onClickShareButton(element) }
-                  src={ shareIcon }
-                >
-                  <img
+                  </div>
+                  <button
+                    data-testid={ `${index}-horizontal-share-btn` }
+                    type="button"
+                    onClick={ () => this.onClickShareButton(element) }
                     src={ shareIcon }
-                    alt="ShareIcon"
+                    className="btnSh"
+                  >
+                    <img
+                      src={ share1 }
+                      className="imgBtnShare"
+                      alt="ShareIcon"
+                    />
+                  </button>
+                  { isLinkCopied && (<p>Link copied!</p>) }
+                  <ButtonFavorite
+                    receitas={ element }
+                    testId={ `${index}-horizontal-favorite-btn` }
                   />
-                </button>
-                { isLinkCopied && (<p>Link copied!</p>) }
-                <ButtonFavorite
-                  receitas={ element }
-                  testId={ `${index}-horizontal-favorite-btn` }
-                />
 
-                {/* <button
+                  {/* <button
                   data-testid={ `${index}-horizontal-favorite-btn` }
                   type="button"
                   onClick={ this.saveRecipe }
@@ -99,7 +105,8 @@ class FavoriteRecipes extends Component {
                     alt="FavoriteIcon"
                   />
                 </button> */}
-              </li>
+                </div>
+              </div>
             ))
           }
         </ul>
