@@ -105,6 +105,7 @@ class Recipes extends Component {
             type="button"
             data-testid="All-category-filter"
             onClick={ this.allFilters }
+            className="btn-all"
           >
             <img src={ salada } alt="comida" />
           </button>

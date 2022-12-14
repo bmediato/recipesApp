@@ -3,9 +3,12 @@
 }
 
 .recipes-food {
-  border: 1px solid black;
+  background: white;
+  border: 0.51px solid #b1b1b1;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
 .img-fod {
@@ -15,4 +18,9 @@
 .ul-food {
   display: flex;
   flex-wrap: wrap;
+}
+
+.btn-all {
+  background: white;
+  border: none;
 }
