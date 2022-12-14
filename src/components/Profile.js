@@ -2,6 +2,10 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import './css/Profile.css';
+import check from '../images/check.png';
+import fav from '../images/fav.png';
+import logout from '../images/logout.png';
 
 class Profile extends Component {
   constructor() {
@@ -51,30 +55,44 @@ class Profile extends Component {
           imgSearch={ false }
         />
         <div>
-          <div data-testid="profile-email">
+          <div data-testid="profile-email" className="email">
             { email }
           </div>
-          <button
-            type="button"
-            data-testid="profile-done-btn"
-            onClick={ this.btnDoneRecipes }
-          >
-            Done Recipes
-          </button>
-          <button
-            type="button"
-            data-testid="profile-favorite-btn"
-            onClick={ this.btnFavoriteRecipes }
-          >
-            Favorite Recipes
-          </button>
-          <button
-            type="button"
-            data-testid="profile-logout-btn"
-            onClick={ this.btnLogout }
-          >
-            Logout
-          </button>
+          <div className="buttonsDFL">
+            <button
+              type="button"
+              data-testid="profile-done-btn"
+              onClick={ this.btnDoneRecipes }
+              className="doneRecipes"
+            >
+              <img
+                src={ check }
+                alt="done recipes"
+                className="imgDone"
+              />
+              Done Recipes
+            </button>
+            <hr />
+            <button
+              type="button"
+              data-testid="profile-favorite-btn"
+              onClick={ this.btnFavoriteRecipes }
+              className="favRec"
+            >
+              <img src={ fav } alt="fav recipes" className="imgF" />
+              Favorite Recipes
+            </button>
+            <hr />
+            <button
+              type="button"
+              data-testid="profile-logout-btn"
+              onClick={ this.btnLogout }
+              className="logout"
+            >
+              <img src={ logout } alt="logout" className="imgL" />
+              Logout
+            </button>
+          </div>
         </div>
         <Footer />
       </div>

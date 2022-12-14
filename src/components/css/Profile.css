@@ -1,0 +1,41 @@
+.email {
+  color: #fcc436;
+  display: flex;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  justify-content: center;
+  line-height: 16px;
+  text-align: center;
+}
+
+.doneRecipes, .favRec, .logout {
+  background: none;
+  border: none;
+  color: #797d86;
+}
+
+.imgDone, .imgL, .imgF {
+  border: 1.811px solid #fcc436;
+  border-radius: 45.28px;
+  box-sizing: border-box;
+  height: 50px;
+  margin: 5px;
+  margin-left: 19px;
+  padding: 8px;
+  width: 50px;
+}
+
+.buttonsDFL {
+  align-items: baseline;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+hr {
+  border: 0.5px solid #b1b1b1;
+  margin-left: 22%;
+  top: 409px;
+  width: 290px;
+}
