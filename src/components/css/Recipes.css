@@ -8,6 +8,7 @@
   border-radius: 5px;
   display: flex;
   flex-direction: column;
+  margin: 3px;
   text-align: center;
 }
 
@@ -18,9 +19,20 @@
 .ul-food {
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .btn-all {
   background: white;
   border: none;
+}
+
+.vaca, .pao, .galinha, .sobremesa, .goat, .salada {
+  border: 1.811px solid #fcc436;
+  border-radius: 45.28px;
+  box-sizing: border-box;
+  height: 50px;
+  margin: 5px;
+  margin-left: 19px;
+  width: 50px;
 }

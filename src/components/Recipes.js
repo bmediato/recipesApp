@@ -82,11 +82,11 @@ class Recipes extends Component {
 
   render() {
     const icons = [
-      <img src={ vaca } alt="beef" key={ 0 } />,
-      <img src={ breakfast } alt="cafe " key={ 1 } />,
-      <img src={ chicken } alt="chicken" key={ 2 } />,
-      <img src={ dessert } alt="dessert" key={ 3 } />,
-      <img src={ goat } alt="dessert" key={ 4 } />,
+      <img src={ vaca } alt="beef" key={ 0 } className="vaca" />,
+      <img src={ breakfast } alt="cafe " key={ 1 } className="pao" />,
+      <img src={ chicken } alt="chicken" key={ 2 } className="galinha" />,
+      <img src={ dessert } alt="dessert" key={ 3 } className="sobremesa" />,
+      <img src={ goat } alt="dessert" key={ 4 } className="goat" />,
     ];
     const { history, page, recipes } = this.props;
     const { categories } = this.state;
@@ -107,7 +107,7 @@ class Recipes extends Component {
             onClick={ this.allFilters }
             className="btn-all"
           >
-            <img src={ salada } alt="comida" />
+            <img src={ salada } alt="comida" className="salada" />
           </button>
 
           { categories.map((category, index) => (
