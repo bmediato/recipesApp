@@ -11,6 +11,13 @@ import { getDrink,
   getDrinksCategories,
   searchCategoriesDrink } from '../services/drinkAPI';
 import Footer from './Footer';
+import './css/Recipes.css';
+import salada from '../images/salada.png';
+import vaca from '../images/vaca.png';
+import breakfast from '../images/breakfast.png';
+import chicken from '../images/chicken.png';
+import dessert from '../images/dessert.png';
+import goat from '../images/goat.png';
 
 class Recipes extends Component {
   state = {
@@ -74,6 +81,13 @@ class Recipes extends Component {
   };
 
   render() {
+    const icons = [
+      <img src={ vaca } alt="beef" key={ 0 } />,
+      <img src={ breakfast } alt="cafe " key={ 1 } />,
+      <img src={ chicken } alt="chicken" key={ 2 } />,
+      <img src={ dessert } alt="dessert" key={ 3 } />,
+      <img src={ goat } alt="dessert" key={ 4 } />,
+    ];
     const { history, page, recipes } = this.props;
     const { categories } = this.state;
 
@@ -92,12 +106,12 @@ class Recipes extends Component {
             data-testid="All-category-filter"
             onClick={ this.allFilters }
           >
-            All
+            <img src={ salada } alt="comida" />
           </button>
 
-          { categories.map((category) => (
+          { categories.map((category, index) => (
             <label htmlFor={ category.strCategory } key={ category.strCategory }>
-              {category.strCategory}
+              {icons[index]}
               <input
                 type="radio"
                 data-testid={ `${category.strCategory}-category-filter` }
@@ -105,18 +119,24 @@ class Recipes extends Component {
                 name="radioInput"
                 value={ category.strCategory }
                 onClick={ this.onClickRadioButton }
+                className="foods"
               />
             </label>))}
         </form>
-        <ul>
+        <ul className="ul-food">
           {
             recipes.slice(0, max).map((element, index) => (
-              <li data-testid={ `${index}-recipe-card` } key={ index }>
+              <div
+                data-testid={ `${index}-recipe-card` }
+                key={ index }
+                className="recipes-food"
+              >
                 <Link to={ this.linkNames(element.idMeal || element.idDrink) }>
                   <img
                     alt={ `Recipes ${page}` }
                     src={ element.strDrinkThumb || element.strMealThumb }
                     data-testid={ `${index}-card-img` }
+                    className="img-fod"
                   />
                 </Link>
                 <p
@@ -124,7 +144,7 @@ class Recipes extends Component {
                 >
                   { element.strDrink || element.strMeal }
                 </p>
-              </li>
+              </div>
             ))
           }
         </ul>
