@@ -74,6 +74,7 @@ export default class ButtonFavorite extends Component {
         <img
           src={ isFavorited ? gostar : gostarWhite }
           alt="FavoriteIcon"
+          className="imgBtnFav"
         />
       </button>
     );

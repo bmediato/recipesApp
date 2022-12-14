@@ -107,21 +107,21 @@ export default function RecipeDetails({ value }) {
         {recomendation ? recomendation.slice(0, num)
           .map((item, index) => ((item.strMeal === undefined) ? (
             <div key={ `drink ${index}` } data-testid={ `${index}-recommendation-card` }>
-              <h1 data-testid={ `${index}-recommendation-title` }>{item.strDrink}</h1>
               <img
                 src={ item.strDrinkThumb }
                 alt={ item.strDrink }
-                style={ { maxWidth: '250px' } }
+                style={ { maxWidth: '218px' } }
               />
+              <h1 data-testid={ `${index}-recommendation-title` }>{item.strDrink}</h1>
             </div>)
             : (
               <div key={ `meal ${index}` } data-testid={ `${index}-recommendation-card` }>
-                <h1 data-testid={ `${index}-recommendation-title` }>{item.strMeal}</h1>
                 <img
                   src={ item.strMealThumb }
                   alt={ item.strMeal }
                   style={ { maxWidth: '200px' } }
                 />
+                <h1 data-testid={ `${index}-recommendation-title` }>{item.strMeal}</h1>
               </div>
             ))) : null}
       </div>

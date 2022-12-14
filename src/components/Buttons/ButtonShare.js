@@ -28,6 +28,7 @@ export default function ButtonShare() {
         <img
           src={ share1 }
           alt="ShareIcon"
+          className="imgBtnShare"
         />
       </button>
       {isLinkCopied && (<p>Link copied!</p>)}
