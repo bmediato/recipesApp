@@ -4,6 +4,8 @@ import { drinkID } from '../services/drinkAPI';
 import { foodID } from '../services/foodAPI';
 import ButtonShare from './Buttons/ButtonShare';
 import ButtonFavorite from './Buttons/ButtonFavorite';
+import './css/RecipeInProgress.css';
+import './css/RecipeDetails.css';
 
 class RecipeInProgress extends Component {
   state = {
@@ -39,46 +41,64 @@ class RecipeInProgress extends Component {
     return (
       <>
         <div key={ recipe.idMeal || recipe.idDrink }>
-          <img
-            data-testid="recipe-photo"
-            src={ recipe.strMealThumb || recipe.strDrinkThumb }
-            alt={ recipe.strMeal || recipe.strDrink }
-          />
-          <h1 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h1>
-          <h4 data-testid="recipe-category">
-            { recipe.strAlcoholic || recipe.strCategory}
-          </h4>
-          <h4
+          <div className="img-recipe">
+            <img
+              data-testid="recipe-photo"
+              src={ recipe.strMealThumb || recipe.strDrinkThumb }
+              alt={ recipe.strMeal || recipe.strDrink }
+              className="foodDetails"
+            />
+          </div>
+          <div className="titles">
+            <h1 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h1>
+            <h4 data-testid="recipe-category">
+              { recipe.strAlcoholic || recipe.strCategory}
+            </h4>
+
+          </div>
+          <h2 className="ingred">Ingredients</h2>
+          <div className="aa">
+            {Object.entries(recipe)
+              .filter(([e, i]) => e.includes('strIngredient') && i).map((el, index) => (
+                <label
+                  key={ index }
+                  data-testid={ `${index}-ingredient-step` }
+                  htmlFor={ `${index}-ingredient-step` }
+                >
+                  <input
+                    type="checkbox"
+                    id={ `${index}-ingredient-step` }
+                    name="checke"
+                    onChange={ this.check }
+                    className="checkinput"
+                  />
+                  {' '}
+                  {el[1]}
+                </label>
+              ))}
+          </div>
+          <h2 className="ingred">Instructions</h2>
+          <p
             data-testid="instructions"
+            className="pInstructions"
           >
             {recipe.strInstructions}
-          </h4>
-          {Object.entries(recipe)
-            .filter(([e, i]) => e.includes('strIngredient') && i).map((el, index) => (
-              <label
-                key={ index }
-                data-testid={ `${index}-ingredient-step` }
-                htmlFor={ `${index}-ingredient-step` }
-              >
-                <input
-                  type="checkbox"
-                  id={ `${index}-ingredient-step` }
-                  name="checke"
-                  onChange={ this.check }
-                />
-                {el[1]}
-              </label>
-            ))}
+          </p>
+
         </div>
         <ButtonShare />
         <ButtonFavorite receitas={ recipe } testId="favorite-btn" />
-        <button
-          data-testid="finish-recipe-btn"
-          type="button"
-        >
-          Finalizar receita
+        <div className="btnFn">
+          <button
+            data-testid="finish-recipe-btn"
+            type="button"
+            className="btnFinish"
+          >
+            Finalizar receita
 
-        </button>
+          </button>
+
+        </div>
       </>
     );
   }

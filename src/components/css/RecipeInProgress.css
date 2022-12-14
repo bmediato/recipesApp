@@ -1,0 +1,43 @@
+.btnFinish {
+  align-items: center;
+  background: #fcc436;
+  border: #fcc436;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  height: 40px;
+  justify-content: center;
+  letter-spacing: 0.03em;
+  line-height: 14px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 336px;
+}
+
+.btnFn {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+
+.aa {
+  background: white;
+  border: 0.55px solid #b1b1b1;
+  border-radius: 5.35px;
+  display: flex;
+  flex-flow: column wrap;
+  height: 146px;
+  margin: 20px;
+  padding: 7px;
+}
+
+.checkinput {
+  background-color: #eee;
+  border-radius: 2px;
+  height: 20px;
+  width: 20px;
+}
+
