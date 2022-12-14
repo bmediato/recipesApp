@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
-import shareIcon from '../../images/shareIcon.svg';
+// import shareIcon from '../../images/shareIcon.svg';
+import '../css/RecipeDetails.css';
+import share1 from '../../images/share1.png';
 
 const copy = require('clipboard-copy');
 
@@ -21,9 +23,10 @@ export default function ButtonShare() {
         data-testid="share-btn"
         type="button"
         onClick={ onClickShareButton }
+        className="btnShare"
       >
         <img
-          src={ shareIcon }
+          src={ share1 }
           alt="ShareIcon"
         />
       </button>

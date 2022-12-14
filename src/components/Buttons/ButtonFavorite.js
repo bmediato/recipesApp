@@ -1,7 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../../images/blackHeartIcon.svg';
+// import whiteHeartIcon from '../../images/whiteHeartIcon.svg';
+// import blackHeartIcon from '../../images/blackHeartIcon.svg';
+import '../css/RecipeDetails.css';
+import gostar from '../../images/gostar.png';
+import gostarWhite from '../../images/gostarWhite.png';
 
 export default class ButtonFavorite extends Component {
   state = {
@@ -65,11 +68,11 @@ export default class ButtonFavorite extends Component {
         data-testid={ testId }
         type="button"
         onClick={ isFavorited ? this.deleteRecipe : this.saveRecipe }
-        src={ isFavorited ? blackHeartIcon : whiteHeartIcon }
-
+        src={ isFavorited ? gostar : gostarWhite }
+        className="btnFav"
       >
         <img
-          src={ isFavorited ? blackHeartIcon : whiteHeartIcon }
+          src={ isFavorited ? gostar : gostarWhite }
           alt="FavoriteIcon"
         />
       </button>

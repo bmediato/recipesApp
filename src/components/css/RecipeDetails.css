@@ -1,0 +1,81 @@
+.foodDetails {
+  border-radius: 5%;
+  height: 350px;
+  margin-top: 10px;
+  width: 85%;
+}
+
+.img-recipe {
+  display: flex;
+  justify-content: center;
+}
+
+.ul-ingredients {
+  border: 0.55px solid #b1b1b1;
+  border-radius: 5.35px;
+  margin: 10px;
+}
+
+.pInstructions {
+  border: 0.55px solid #b1b1b1;
+  border-radius: 5.35px;
+  margin: 10px;
+  padding: 10px;
+}
+
+.titles {
+  color: white;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 1000;
+  left: 40%;
+  letter-spacing: 0.21em;
+  line-height: 20px;
+  position: absolute;
+  text-align: center;
+  text-transform: uppercase;
+  top: 25%;
+}
+
+.ingred {
+  color: #1a1b1c;
+  font-size: 23px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  margin: 15px;
+}
+
+.video {
+  border-radius: 3%;
+  height: 205.09px;
+  margin: 10px;
+  width: 336px;
+}
+
+.btnFav, .btnShare {
+  background: white;
+  border: none;
+  color: #41197f;
+}
+
+.divVideo {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.rec {
+  display: flex;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  width: 100%;
+  border: 1px solid black;
+  scrollbar-color: #41197f;
+}
+
+.rec::-webkit-scrollbar-thumb {
+  background-color: blue;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 3px solid orange;
+}

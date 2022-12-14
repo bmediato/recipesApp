@@ -142,6 +142,7 @@ class Recipes extends Component {
                 </Link>
                 <p
                   data-testid={ `${index}-card-name` }
+                  className="paragrafo"
                 >
                   { element.strDrink || element.strMeal }
                 </p>

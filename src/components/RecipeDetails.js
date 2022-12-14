@@ -8,6 +8,7 @@ import { foodID, getMeal } from '../services/foodAPI';
 import { drinkID, getDrink } from '../services/drinkAPI';
 import './css/buttonStart.css';
 import ButtonShare from './Buttons/ButtonShare';
+import './css/RecipeDetails.css';
 
 export default function RecipeDetails({ value }) {
   // const carregando = 'carregando...';
@@ -51,17 +52,26 @@ export default function RecipeDetails({ value }) {
   return receitas.map((recipe) => (
     <>
       <div key={ recipe.idMeal || recipe.idDrink }>
-        <img
-          data-testid="recipe-photo"
-          src={ recipe.strMealThumb || recipe.strDrinkThumb }
-          alt={ recipe.strMeal || recipe.strDrink }
-        />
-        <h1 data-testid="recipe-title">{recipe.strMeal || recipe.strDrink}</h1>
-        <h4 data-testid="recipe-category">
-          { recipe.strAlcoholic || recipe.strCategory}
-        </h4>
+        <div className="img-recipe">
+          <img
+            data-testid="recipe-photo"
+            src={ recipe.strMealThumb || recipe.strDrinkThumb }
+            alt={ recipe.strMeal || recipe.strDrink }
+            className="foodDetails"
+          />
+
+        </div>
+        <div className="titles">
+          <h1 data-testid="recipe-title" className="recipeTitle">
+            {recipe.strMeal || recipe.strDrink}
+          </h1>
+          <h4 data-testid="recipe-category">
+            { recipe.strAlcoholic || recipe.strCategory}
+          </h4>
+        </div>
         <div>
-          <ul>
+          <h2 className="ingred">Ingredients</h2>
+          <ul className="ul-ingredients">
             {listIng(recipe).map((item, index) => (
               <li
                 data-testid={ `${index}-ingredient-name-and-measure` }
@@ -73,20 +83,25 @@ export default function RecipeDetails({ value }) {
             ))}
           </ul>
         </div>
-        <h4
+        <h2 className="ingred">Instructions</h2>
+        <p
           data-testid="instructions"
+          className="pInstructions"
         >
           {recipe.strInstructions}
-        </h4>
-        {recipe.strYoutube && (
-          <iframe
-            data-testid="video"
-            title={ recipe.strMeal }
-            width="420"
-            height="315"
-            src={ `https://www.youtube.com/embed/${recipe.strYoutube.split('=')[1]}` }
-          />
-        )}
+        </p>
+        <div className="divVideo">
+          {recipe.strYoutube && (
+            <iframe
+              data-testid="video"
+              className="video"
+              title={ recipe.strMeal }
+              width="420"
+              height="315"
+              src={ `https://www.youtube.com/embed/${recipe.strYoutube.split('=')[1]}` }
+            />
+          )}
+        </div>
       </div>
       <div className="rec">
         {recomendation ? recomendation.slice(0, num)
@@ -96,7 +111,7 @@ export default function RecipeDetails({ value }) {
               <img
                 src={ item.strDrinkThumb }
                 alt={ item.strDrink }
-                style={ { maxWidth: '180px' } }
+                style={ { maxWidth: '250px' } }
               />
             </div>)
             : (

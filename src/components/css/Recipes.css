@@ -36,3 +36,16 @@
   margin-left: 19px;
   width: 50px;
 }
+
+.paragrafo {
+  color: #41197f;
+  display: flex;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  justify-content: center;
+  line-height: 12px;
+  margin-top: 2px;
+  padding-top: 2px;
+  text-align: center;
+}
